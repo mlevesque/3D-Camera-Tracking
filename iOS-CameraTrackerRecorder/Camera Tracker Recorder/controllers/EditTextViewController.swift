@@ -11,13 +11,11 @@ import UIKit
 /// Controller for the edit project name popover view
 class EditTextViewController: UIViewController {
     
-    private var projectName: String = ""
-    private var sceneValue: String = ""
-    private var takeValue: String = ""
-    
     @IBOutlet var projectText: UITextField!
     @IBOutlet var sceneText: UITextField!
     @IBOutlet var takeText: UITextField!
+    
+    private var originalData: NameData?
     
     override func viewDidLoad() {
         projectText.delegate = self
@@ -25,59 +23,28 @@ class EditTextViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        updateTextFields()
+        projectText.text = originalData?.projectName
+        sceneText.text = originalData?.scene
+        takeText.text = String(originalData?.take ?? 0)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    /// Sets the text fields using the given name data
+    /// - Parameter nameData:
+    func setNameData(_ nameData: NameData) {
+        originalData = nameData
     }
     
-    func setText(project: String, scene: String, take: String) {
-        projectName = project
-        sceneValue = scene
-        takeValue = take
+    /// Returns a name data object from the text field values
+    /// - Returns:
+    func getNameData() -> NameData {
+        return NameData(
+            projectName: projectText.text,
+            scene: sceneText.text,
+            take: Int(takeText.text ?? "1") ?? 1)
     }
     
     func dismissKeypad() {
         takeText.resignFirstResponder()
-    }
-    
-    private func editEnd(textField: UITextField?, valueRef: inout String) {
-        if takeText?.text?.isEmpty ?? true {
-            textField?.text = valueRef
-        }
-        else {
-            valueRef = textField?.text ?? valueRef
-        }
-    }
-    
-    private func updateTextFields() {
-        projectText.text = projectName
-        sceneText.text = sceneValue
-        takeText.text = "\(takeValue)"
-    }
-    
-    private func notifyTextChange(useProject: Bool, useScene: Bool, useTake: Bool) {
-        var userInfo: [AnyHashable: Any] = [:]
-        if useProject {
-            userInfo[TextKeys.ProjectName] = projectName
-        }
-        if useScene {
-            userInfo[TextKeys.SceneValue] = sceneValue
-        }
-        if useTake {
-            userInfo[TextKeys.TakeValue] = takeValue
-        }
-        
-        if !userInfo.isEmpty {
-            NotificationCenter.default.post(
-                name: MainViewController.notificationName,
-                object: nil,
-                userInfo: userInfo)
-        }
-    }
-    
-    private func closeView() {
-        self.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -100,28 +67,24 @@ extension EditTextViewController {
     }
     
     @IBAction func onProjectEditEnd(_ sender: Any) {
-        editEnd(textField: sender as? UITextField, valueRef: &projectName)
+        fallbackIfEmpty(textField: sender as? UITextField, fallbackValue: "ProjectName")
     }
     
     @IBAction func onSceneEditEnd(_ sender: Any) {
-        editEnd(textField: sender as? UITextField, valueRef: &sceneValue)
+        fallbackIfEmpty(textField: sender as? UITextField, fallbackValue: "1")
     }
     
     @IBAction func onTakeEditEnd(_ sender: Any) {
-        editEnd(textField: sender as? UITextField, valueRef: &takeValue)
+        fallbackIfEmpty(textField: sender as? UITextField, fallbackValue: "1")
+    }
+    
+    private func fallbackIfEmpty(textField: UITextField?, fallbackValue: String) {
+        if takeText?.text?.isEmpty ?? true {
+            textField?.text = fallbackValue
+        }
     }
     
     @IBAction func onTakeResetTouchUp(_ sender: Any) {
-        takeValue = "1"
-        takeText.text = takeValue
-    }
-    
-    @IBAction func onSaveTouchUp(_ sender: Any) {
-        notifyTextChange(useProject: true, useScene: true, useTake: true)
-        closeView()
-    }
-    
-    @IBAction func onCancelTouchUp(_ sender: Any) {
-        closeView()
+        takeText.text = "1"
     }
 }

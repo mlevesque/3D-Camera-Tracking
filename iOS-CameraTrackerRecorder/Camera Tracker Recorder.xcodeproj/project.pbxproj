@@ -18,6 +18,8 @@
 		33BA36F122F115D000A44EFF /* SceneRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA36F022F115D000A44EFF /* SceneRecorder.swift */; };
 		33BA36F322F6D06900A44EFF /* SceneDataRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA36F222F6D06900A44EFF /* SceneDataRecorder.swift */; };
 		33BA36F522F6D1BB00A44EFF /* SceneAudioRecorderDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BA36F422F6D1BB00A44EFF /* SceneAudioRecorderDecorator.swift */; };
+		33E01A8624BDC1D0004EB73F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E01A8524BDC1D0004EB73F /* SettingsViewController.swift */; };
+		33E01A8824BE0510004EB73F /* PersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E01A8724BE0510004EB73F /* PersistentData.swift */; };
 		33EA48CF22CB4372001AD43C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA48CE22CB4372001AD43C /* AppDelegate.swift */; };
 		33EA48D322CB4372001AD43C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA48D222CB4372001AD43C /* MainViewController.swift */; };
 		33EA48D622CB4372001AD43C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33EA48D422CB4372001AD43C /* Main.storyboard */; };
@@ -56,6 +58,8 @@
 		33BA36F022F115D000A44EFF /* SceneRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneRecorder.swift; sourceTree = "<group>"; };
 		33BA36F222F6D06900A44EFF /* SceneDataRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDataRecorder.swift; sourceTree = "<group>"; };
 		33BA36F422F6D1BB00A44EFF /* SceneAudioRecorderDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneAudioRecorderDecorator.swift; sourceTree = "<group>"; };
+		33E01A8524BDC1D0004EB73F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		33E01A8724BE0510004EB73F /* PersistentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
 		33EA48CB22CB4372001AD43C /* Cam Track Rec.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cam Track Rec.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33EA48CE22CB4372001AD43C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33EA48D222CB4372001AD43C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 				33B6E1B222FF1093004ABC73 /* TextKeys.swift */,
 				33EA48D222CB4372001AD43C /* MainViewController.swift */,
 				33B6E1B022F905B9004ABC73 /* EditTextViewController.swift */,
+				33E01A8524BDC1D0004EB73F /* SettingsViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -130,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				33B6E2112302F23E004ABC73 /* JsonSchemas.swift */,
+				33E01A8724BE0510004EB73F /* PersistentData.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -336,10 +342,12 @@
 				33B6E1B122F905B9004ABC73 /* EditTextViewController.swift in Sources */,
 				33B6E20F2302CB88004ABC73 /* JsonStreamWriter.swift in Sources */,
 				33EA48D322CB4372001AD43C /* MainViewController.swift in Sources */,
+				33E01A8824BE0510004EB73F /* PersistentData.swift in Sources */,
 				33B6E2122302F23E004ABC73 /* JsonSchemas.swift in Sources */,
 				33EA48CF22CB4372001AD43C /* AppDelegate.swift in Sources */,
 				33BA36F522F6D1BB00A44EFF /* SceneAudioRecorderDecorator.swift in Sources */,
 				33BA36F122F115D000A44EFF /* SceneRecorder.swift in Sources */,
+				33E01A8624BDC1D0004EB73F /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 import UIKit
 
 /// This adds extra functionality to text fields, allowing for a done button to appear on the onscreen keyboard.
-extension UITextField{
+extension UITextField {
     @IBInspectable var doneAccessory: Bool {
         get {
             return self.doneAccessory

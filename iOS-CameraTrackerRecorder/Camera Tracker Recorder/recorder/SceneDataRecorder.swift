@@ -24,14 +24,14 @@ final class SceneDataRecorder : SceneRecorder {
     
     // MARK: Static Methods
     
-    static private func buildFileName(projectName: String, scene: String, take: Int) -> String {
-        return "\(projectName)-\(scene)-\(take)"
+    static private func buildFileName(nameData: NameData) -> String {
+        return "\(nameData.projectName)-\(nameData.scene)-\(nameData.take)"
     }
     
     // MARK: Constructor/Destructor
     
-    init(projectName: String, scene: String, take: Int) throws {
-        m_name = SceneDataRecorder.buildFileName(projectName: projectName, scene: scene, take: take)
+    init(nameData: NameData) throws {
+        m_name = SceneDataRecorder.buildFileName(nameData: nameData)
         m_prepared = false
         m_recording = false
         m_frameCount = 0
