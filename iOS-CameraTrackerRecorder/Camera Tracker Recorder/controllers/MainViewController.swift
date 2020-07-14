@@ -304,9 +304,30 @@ extension MainViewController {
             return
         }
         
+        // check if file already exists and if so, prompt user
         let recorder = sceneRecorder!
         if (!recorder.isRecording) {
-            startRecording()
+            if sceneRecorder!.doesFileExist() {
+                // Initialize Alert Controller
+                let alertController = UIAlertController(title: "Warning", message: "File already exists for the current project name, scene, and take. Are you sure you want to overwrite it?", preferredStyle: .alert)
+                
+                // Initialize Actions
+                let yesAction = UIAlertAction(title: "Overwrite", style: .destructive) { (action) -> Void in
+                    self.startRecording()
+                }
+                let noAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+                }
+                 
+                // Add Actions
+                alertController.addAction(yesAction)
+                alertController.addAction(noAction)
+                 
+                // Present Alert Controller
+                self.present(alertController, animated: true, completion: nil)
+            }
+            else {
+                startRecording()
+            }
         }
         else {
             stopRecording()
