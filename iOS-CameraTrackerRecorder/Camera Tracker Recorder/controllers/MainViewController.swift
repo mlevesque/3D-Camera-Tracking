@@ -22,6 +22,9 @@ class MainViewController: UIViewController {
     
     // Buttons
     @IBOutlet var recButton: UIButton!
+    @IBOutlet var settingsButton: UIButton!
+    @IBOutlet var editNameButton: UIButton!
+    @IBOutlet var resetOriginButton: UIButton!
     
     // Text Fields
     @IBOutlet var projectText: UILabel!
@@ -149,6 +152,9 @@ class MainViewController: UIViewController {
         
         // update UI
         updateRecordButtonUI()
+        settingsButton.isEnabled = false
+        editNameButton.isEnabled = false
+        resetOriginButton.isEnabled = false
     }
     
     /// Stops recording, increments the take value, and updates UI
@@ -161,6 +167,11 @@ class MainViewController: UIViewController {
         // increment take - Record button will be updated in the changeNameData call
         let d = data.nameData
         changeNameData(NameData(projectName: d.projectName, scene: d.scene, take: Int(d.take) + 1))
+        
+        // update UI
+        settingsButton.isEnabled = true
+        editNameButton.isEnabled = true
+        resetOriginButton.isEnabled = true
     }
     
     /// Initializes a new instance for the recorder using the current name data
