@@ -194,27 +194,6 @@
                                     <action selector="onResetOriginTouchUp:" destination="BV1-FR-VrT" eventType="touchUpInside" id="VFZ-GV-cdk"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjn-JP-xDf">
-                                <rect key="frame" x="132" y="727" width="150" height="50"/>
-                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="HO0-Hd-C2N"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="v1n-cl-sq8"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
-                                <state key="normal" title="Record">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="onRecordTouchUp:" destination="BV1-FR-VrT" eventType="touchUpInside" id="e4i-Zl-S1y"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xt-8J-Hja" userLabel="Settings Button">
                                 <rect key="frame" x="376.66666666666669" y="54" width="17.333333333333314" height="29"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="24"/>
@@ -356,6 +335,58 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjn-JP-xDf">
+                                <rect key="frame" x="132" y="727" width="150" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="HO0-Hd-C2N"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="v1n-cl-sq8"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                                <state key="normal" title="Record">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onRecordTouchUp:" destination="BV1-FR-VrT" eventType="touchUpInside" id="e4i-Zl-S1y"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ANY-li-IVX" userLabel="Record Button Icon">
+                                <rect key="frame" x="262" y="752" width="40" height="40"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hwQ-Ba-2bx" userLabel="icon_caution background">
+                                        <rect key="frame" x="17.666666666666686" y="12.666666666666629" width="5" height="15"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="5" id="B1k-nd-ccK"/>
+                                            <constraint firstAttribute="height" constant="15" id="oBE-ae-zMf"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_caution" translatesAutoresizingMaskIntoConstraints="NO" id="du9-Fe-cwh">
+                                        <rect key="frame" x="7.6666666666666856" y="7.6666666666666288" width="25" height="25"/>
+                                        <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="Nrc-8g-3zk"/>
+                                            <constraint firstAttribute="width" constant="25" id="v6o-Q3-dzR"/>
+                                        </constraints>
+                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="heavy"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="KpW-uE-uz9"/>
+                                    <constraint firstItem="du9-Fe-cwh" firstAttribute="centerY" secondItem="ANY-li-IVX" secondAttribute="centerY" id="Lyt-vc-ndm"/>
+                                    <constraint firstItem="hwQ-Ba-2bx" firstAttribute="centerX" secondItem="du9-Fe-cwh" secondAttribute="centerX" id="fx0-BI-fwD"/>
+                                    <constraint firstItem="du9-Fe-cwh" firstAttribute="centerX" secondItem="ANY-li-IVX" secondAttribute="centerX" id="kAk-Ay-lgn"/>
+                                    <constraint firstAttribute="width" constant="40" id="kF3-YK-W4y"/>
+                                    <constraint firstItem="du9-Fe-cwh" firstAttribute="centerY" secondItem="hwQ-Ba-2bx" secondAttribute="centerY" id="vIh-XH-NuL"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -367,6 +398,7 @@
                             <constraint firstItem="kxb-jG-bjt" firstAttribute="top" secondItem="F4S-7m-URx" secondAttribute="bottom" constant="10" id="9jn-vp-IJg"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="U0K-SW-4ec" secondAttribute="leading" id="A8O-6l-XoT"/>
                             <constraint firstItem="F4S-7m-URx" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" constant="10" id="Ccg-1u-8Pp"/>
+                            <constraint firstItem="ANY-li-IVX" firstAttribute="centerY" secondItem="bjn-JP-xDf" secondAttribute="bottom" constant="-5" id="FzG-i0-Xzf"/>
                             <constraint firstItem="4Ub-Hz-qor" firstAttribute="leading" secondItem="U0K-SW-4ec" secondAttribute="leading" constant="10" id="Jys-Kl-74u"/>
                             <constraint firstAttribute="trailing" secondItem="4Ub-Hz-qor" secondAttribute="trailing" constant="10" id="K6m-kb-4iC"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="4Ub-Hz-qor" secondAttribute="bottom" constant="20" id="Ra1-Dm-Pst">
@@ -384,6 +416,7 @@
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstItem="5xt-8J-Hja" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" constant="10" id="bhj-i6-yoP"/>
+                            <constraint firstItem="ANY-li-IVX" firstAttribute="centerX" secondItem="bjn-JP-xDf" secondAttribute="trailing" id="dms-rN-wHR"/>
                             <constraint firstItem="5xt-8J-Hja" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" constant="20" id="fgm-OZ-5o0"/>
                             <constraint firstAttribute="bottom" secondItem="BrB-h1-WRS" secondAttribute="bottom" id="iJB-uZ-U7P"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="bjn-JP-xDf" secondAttribute="bottom" constant="85" id="jF3-On-G0n"/>
@@ -412,6 +445,7 @@
                                 <exclude reference="lpc-gL-2Nk"/>
                                 <exclude reference="37J-VB-Ct7"/>
                                 <exclude reference="8l4-tx-m1H"/>
+                                <exclude reference="Ra1-Dm-Pst"/>
                                 <exclude reference="Vns-UW-Qg8"/>
                                 <exclude reference="jF3-On-G0n"/>
                                 <exclude reference="paC-81-07E"/>
@@ -420,13 +454,12 @@
                                 <exclude reference="Ys2-F4-q14"/>
                                 <exclude reference="ZTi-Gs-TxG"/>
                                 <exclude reference="r9D-8e-ZKj"/>
+                                <exclude reference="bhj-i6-yoP"/>
+                                <exclude reference="fgm-OZ-5o0"/>
                                 <exclude reference="8bd-Lt-1AU"/>
                                 <exclude reference="Jys-Kl-74u"/>
                                 <exclude reference="K6m-kb-4iC"/>
-                                <exclude reference="Ra1-Dm-Pst"/>
                                 <exclude reference="rW7-E7-9Gb"/>
-                                <exclude reference="bhj-i6-yoP"/>
-                                <exclude reference="fgm-OZ-5o0"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact-widthClass=regular">
@@ -436,14 +469,14 @@
                                 <include reference="iJB-uZ-U7P"/>
                                 <include reference="kWy-ye-sw5"/>
                                 <include reference="37J-VB-Ct7"/>
+                                <include reference="Ra1-Dm-Pst"/>
                                 <include reference="paC-81-07E"/>
                                 <include reference="xd0-dm-EcP"/>
                                 <include reference="Ys2-F4-q14"/>
                                 <include reference="ZTi-Gs-TxG"/>
-                                <include reference="8bd-Lt-1AU"/>
-                                <include reference="Ra1-Dm-Pst"/>
-                                <exclude reference="rW7-E7-9Gb"/>
                                 <include reference="fgm-OZ-5o0"/>
+                                <include reference="8bd-Lt-1AU"/>
+                                <exclude reference="rW7-E7-9Gb"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -457,9 +490,9 @@
                                 <include reference="jF3-On-G0n"/>
                                 <include reference="Ccg-1u-8Pp"/>
                                 <include reference="r9D-8e-ZKj"/>
+                                <include reference="bhj-i6-yoP"/>
                                 <include reference="Jys-Kl-74u"/>
                                 <include reference="K6m-kb-4iC"/>
-                                <include reference="bhj-i6-yoP"/>
                             </mask>
                         </variation>
                     </view>
@@ -468,6 +501,7 @@
                         <outlet property="projectText" destination="oyE-Gc-pu2" id="sVo-vm-ECU"/>
                         <outlet property="qualityDisplay" destination="4c3-dE-inN" id="upH-SE-zI3"/>
                         <outlet property="recButton" destination="bjn-JP-xDf" id="VRF-K0-RXo"/>
+                        <outlet property="recButtonIcon" destination="ANY-li-IVX" id="erq-Gk-FWn"/>
                         <outlet property="resetOriginButton" destination="kxb-jG-bjt" id="ZVF-Qt-ucN"/>
                         <outlet property="sceneText" destination="59R-gg-Vkc" id="AdN-2d-Rkn"/>
                         <outlet property="sceneView" destination="BrB-h1-WRS" id="5nT-qQ-ynl"/>
@@ -483,7 +517,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="129.91071428571428" y="128.98550724637681"/>
+            <point key="canvasLocation" x="128.98550724637681" y="128.57142857142856"/>
         </scene>
         <!--Edit Text View Controller-->
         <scene sceneID="PHV-DN-rMz">
@@ -655,6 +689,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icon_caution" width="17" height="16"/>
         <image name="icon_edit" width="17" height="17"/>
         <image name="icon_gear" width="18" height="18"/>
         <image name="icon_position" width="20" height="20"/>

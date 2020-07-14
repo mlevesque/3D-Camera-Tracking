@@ -22,6 +22,7 @@ class MainViewController: UIViewController {
     
     // Buttons
     @IBOutlet var recButton: UIButton!
+    @IBOutlet var recButtonIcon: UIView!
     @IBOutlet var settingsButton: UIButton!
     @IBOutlet var editNameButton: UIButton!
     @IBOutlet var resetOriginButton: UIButton!
@@ -195,6 +196,9 @@ class MainViewController: UIViewController {
     
     /// Updates the look of the record button UI
     private func updateRecordButtonUI() {
+        // hide icon
+        recButtonIcon.isHidden = true
+        
         // update look of record button based on whether or not we are recording
         let isRecording = sceneRecorder?.isRecording ?? false
         
@@ -208,6 +212,11 @@ class MainViewController: UIViewController {
         else {
             recButton.backgroundColor = UIColor.red
             recButton.setTitle("Record", for: UIControl.State.normal)
+            
+            // show caution icon if file exists for current name data
+            if sceneRecorder?.doesFileExist() ?? false {
+                recButtonIcon.isHidden = false
+            }
         }
     }
     
