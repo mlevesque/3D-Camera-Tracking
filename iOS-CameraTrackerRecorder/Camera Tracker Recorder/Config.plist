@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>recordButtonTitleStop</key>
+	<string>Stop</string>
+	<key>recordButtonTitleRecord</key>
+	<string>Record</string>
+	<key>overwriteAlertActionCancel</key>
+	<string>Cancel</string>
+	<key>overwriteAlertActionOverwrite</key>
+	<string>Overwrite</string>
+	<key>trackStatusNotAvailable</key>
+	<string>Not Available</string>
+	<key>trackStatusLimited</key>
+	<string>Limited</string>
+	<key>trackStatusRelocalizing</key>
+	<string>Relocalizing</string>
+	<key>trackStatusNotEnoughFeatures</key>
+	<string>Not Enough Features</string>
+	<key>trackStatusInitializing</key>
+	<string>Initializing</string>
+	<key>trackStatusExcessiveMotion</key>
+	<string>Excessive Motion</string>
+	<key>trackStatusGood</key>
+	<string>Good</string>
+	<key>defaultUseAudio</key>
+	<true/>
+	<key>defaultTake</key>
+	<integer>1</integer>
+	<key>defaultScene</key>
+	<string>1</string>
+	<key>defaultProjectName</key>
+	<string>MyProject</string>
+	<key>overwriteAlertDescription</key>
+	<string>File already exists for the current project name, scene, and take. Are you sure you want to overwrite it?</string>
+	<key>overwriteAlertTitle</key>
+	<string>Warning</string>
+</dict>
+</plist>

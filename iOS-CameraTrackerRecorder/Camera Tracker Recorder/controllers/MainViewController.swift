@@ -204,14 +204,16 @@ class MainViewController: UIViewController {
         
         // display button as stop button if currently recording
         if isRecording {
+            let title = getConfigString(withKey: "recordButtonTitleStop")
             recButton.backgroundColor = UIColor.gray
-            recButton.setTitle("Stop", for: UIControl.State.normal)
+            recButton.setTitle(title, for: UIControl.State.normal)
         }
             
         // display as red record button if not currently recording
         else {
+            let title = getConfigString(withKey: "recordButtonTitleRecord")
             recButton.backgroundColor = UIColor.red
-            recButton.setTitle("Record", for: UIControl.State.normal)
+            recButton.setTitle(title, for: UIControl.State.normal)
             
             // show caution icon if file exists for current name data
             if sceneRecorder?.doesFileExist() ?? false {
@@ -309,13 +311,17 @@ extension MainViewController {
         if (!recorder.isRecording) {
             if sceneRecorder!.doesFileExist() {
                 // Initialize Alert Controller
-                let alertController = UIAlertController(title: "Warning", message: "File already exists for the current project name, scene, and take. Are you sure you want to overwrite it?", preferredStyle: .alert)
+                let title = getConfigString(withKey: "overwriteAlertTitle")
+                let description = getConfigString(withKey: "overwriteAlertDescription")
+                let alertController = UIAlertController(title: title, message: description, preferredStyle: .alert)
                 
                 // Initialize Actions
-                let yesAction = UIAlertAction(title: "Overwrite", style: .destructive) { (action) -> Void in
+                let yesTitle = getConfigString(withKey: "overwriteAlertActionOverwrite")
+                let yesAction = UIAlertAction(title: yesTitle, style: .destructive) { (action) -> Void in
                     self.startRecording()
                 }
-                let noAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) -> Void in
+                let noTitle = getConfigString(withKey: "overwriteAlertActionCancel")
+                let noAction = UIAlertAction(title: noTitle, style: .cancel) { (action) -> Void in
                 }
                  
                 // Add Actions

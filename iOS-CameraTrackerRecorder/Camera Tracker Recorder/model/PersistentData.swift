@@ -28,8 +28,8 @@ class PersistentData : NSObject, NSCoding {
     }
     
     init(settings: SettingsData?, nameData: NameData?) {
-        self.settings = settings ?? SettingsData(useAudio: true)
-        self.nameData = nameData ?? NameData(projectName: "My Project", scene: "1", take: 1)
+        self.settings = settings ?? SettingsData(useAudio: nil)
+        self.nameData = nameData ?? NameData(projectName: nil, scene: nil, take: nil)
     }
     
     required convenience init?(coder: NSCoder) {
@@ -52,8 +52,8 @@ class SettingsData : NSObject, NSCoding  {
         coder.encode(useAudio, forKey: PropertyKey.useAudio)
     }
     
-    init(useAudio: Bool) {
-        self.useAudio = useAudio
+    init(useAudio: Bool?) {
+        self.useAudio = useAudio ?? getConfigBool(withKey: "defaultUseAudio")
     }
     
     required convenience init(coder: NSCoder) {
@@ -80,9 +80,9 @@ class NameData : NSObject, NSCoding  {
     }
     
     init(projectName: String?, scene: String?, take: Int?) {
-        self.projectName = projectName ?? "MyProject"
-        self.scene = scene ?? "1"
-        self.take = take ?? 1
+        self.projectName = projectName ?? getConfigString(withKey: "defaultProjectName")
+        self.scene = scene ?? getConfigString(withKey: "defaultScene")
+        self.take = take ?? getConfigInt(withKey: "defaultTake")
     }
     
     required convenience init?(coder: NSCoder) {

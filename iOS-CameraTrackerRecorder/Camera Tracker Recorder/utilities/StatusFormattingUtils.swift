@@ -49,18 +49,25 @@ func formatRotation(_ value: Float) -> NSAttributedString {
 func formatQuality(_ trackingState: ARCamera.TrackingState) -> NSAttributedString {
     switch trackingState {
         case .normal:
-            return NSAttributedString(string: "Good", attributes: qualityGoodAtt)
+            let text = getConfigString(withKey: "trackStatusGood")
+            return NSAttributedString(string: text, attributes: qualityGoodAtt)
         case .limited(.excessiveMotion):
-            return NSAttributedString(string: "Excessive Motion", attributes: qualityCautionAtt)
+            let text = getConfigString(withKey: "trackStatusExcessiveMotion")
+            return NSAttributedString(string: text, attributes: qualityCautionAtt)
         case .limited(.initializing):
-            return NSAttributedString(string: "Initializing", attributes: qualityCautionAtt)
+            let text = getConfigString(withKey: "trackStatusInitializing")
+            return NSAttributedString(string: text, attributes: qualityCautionAtt)
         case .limited(.insufficientFeatures):
-            return NSAttributedString(string: "Not Enough Features", attributes: qualityCautionAtt)
+            let text = getConfigString(withKey: "trackStatusNotEnoughFeatures")
+            return NSAttributedString(string: text, attributes: qualityCautionAtt)
         case .limited(.relocalizing):
-            return NSAttributedString(string: "Relocalizing", attributes: qualityCautionAtt)
+            let text = getConfigString(withKey: "trackStatusRelocalizing")
+            return NSAttributedString(string: text, attributes: qualityCautionAtt)
         case .limited(_):
-            return NSAttributedString(string: "Limited", attributes: qualityCautionAtt)
+            let text = getConfigString(withKey: "trackStatusLimited")
+            return NSAttributedString(string: text, attributes: qualityCautionAtt)
         case .notAvailable:
-            return NSAttributedString(string: "Not Available", attributes: qualityBadAtt)
+            let text = getConfigString(withKey: "trackStatusNotAvailable")
+            return NSAttributedString(string: text, attributes: qualityBadAtt)
     }
 }
