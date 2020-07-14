@@ -8,9 +8,10 @@
 
 import UIKit
 
+/// This adds extra functionality to text fields, allowing for a done button to appear on the onscreen keyboard.
 extension UITextField{
-    @IBInspectable var doneAccessory: Bool{
-        get{
+    @IBInspectable var doneAccessory: Bool {
+        get {
             return self.doneAccessory
         }
         set (hasDone) {
@@ -20,13 +21,12 @@ extension UITextField{
         }
     }
     
-    func addDoneButtonOnKeyboard()
-    {
-        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+    func addDoneButtonOnKeyboard() {
+        let doneToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         doneToolbar.barStyle = .default
         
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneButtonAction))
+        let done = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(self.doneButtonAction))
         
         let items = [flexSpace, done]
         doneToolbar.items = items
@@ -35,8 +35,7 @@ extension UITextField{
         self.inputAccessoryView = doneToolbar
     }
     
-    @objc func doneButtonAction()
-    {
+    @objc func doneButtonAction() {
         self.resignFirstResponder()
     }
 }

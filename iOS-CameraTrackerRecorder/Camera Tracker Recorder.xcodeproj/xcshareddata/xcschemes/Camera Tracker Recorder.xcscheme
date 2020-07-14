@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "33EA48E022CB4374001AD43C"
+               BuildableName = "Camera Tracker RecorderTests.xctest"
+               BlueprintName = "Camera Tracker RecorderTests"
+               ReferencedContainer = "container:Camera Tracker Recorder.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "33EA48EB22CB4374001AD43C"
+               BuildableName = "Camera Tracker RecorderUITests.xctest"
+               BlueprintName = "Camera Tracker RecorderUITests"
+               ReferencedContainer = "container:Camera Tracker Recorder.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

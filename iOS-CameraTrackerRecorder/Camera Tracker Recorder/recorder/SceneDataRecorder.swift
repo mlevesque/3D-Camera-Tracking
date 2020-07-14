@@ -10,7 +10,7 @@ import Foundation
 import ARKit
 import simd
 
-final class SceneDataRecorder : NSObject, SceneRecorder, ARSessionDelegate {
+final class SceneDataRecorder : SceneRecorder {
     private let m_name: String
     private var m_prepared: Bool
     private var m_recording: Bool
@@ -22,22 +22,35 @@ final class SceneDataRecorder : NSObject, SceneRecorder, ARSessionDelegate {
     var isRecording: Bool { get { return m_recording } }
     var name: String { get { return m_name } }
     
-    init(name: String) throws {
-        m_name = name
+    // MARK: Static Methods
+    
+    static private func buildFileName(projectName: String, scene: String, take: Int) -> String {
+        return "\(projectName)-\(scene)-\(take)"
+    }
+    
+    // MARK: Constructor/Destructor
+    
+    init(projectName: String, scene: String, take: Int) throws {
+        m_name = SceneDataRecorder.buildFileName(projectName: projectName, scene: scene, take: take)
         m_prepared = false
         m_recording = false
         m_frameCount = 0
-        super.init()
     }
     
     deinit {
         stopRecording()
     }
     
+    // MARK: Public Methods
+    
+    /// Returns the base URL directory for where the file will be written to.
+    /// - Returns: Directory URL
     func getBasePath() -> URL? {
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
     }
     
+    /// Returns true if the file already exists.
+    /// - Returns: True if it exists. False if not.
     func doesFileExist() -> Bool {
         guard let txtFile = getFileURL() else {
             return false
@@ -45,6 +58,8 @@ final class SceneDataRecorder : NSObject, SceneRecorder, ARSessionDelegate {
         return FileManager.default.fileExists(atPath: txtFile.path)
     }
     
+    /// Prepares for recording by creating the file
+    /// - Throws: RecorderError if file location is bad or file could not be created
     func prepareRecording() throws {
         // don't prepare if already prepared
         guard !isPrepared else {
@@ -65,6 +80,8 @@ final class SceneDataRecorder : NSObject, SceneRecorder, ARSessionDelegate {
         m_prepared = true
     }
     
+    /// Starts the recording and sets up the stream writer.
+    /// - Throws: RecorderError exception if the stream writer could not be created for could not be written to
     func startRecording() throws {
         // Do nothing if recording has already started
         guard !isRecording else {
@@ -101,11 +118,10 @@ final class SceneDataRecorder : NSObject, SceneRecorder, ARSessionDelegate {
         m_recording = true;
     }
     
-    func stopRecording() {
-        m_jsonWriter?.closeFile()
-        m_recording = false
-    }
-    
+    /// AR Session Update. Will add a tracking entry to the Json file if recording is happening.
+    /// - Parameters:
+    ///   - session: Current AR Session
+    ///   - frame: Current AR Frame
     func sessionUpdate(_ session: ARSession, didUpdate frame: ARFrame) {
         if m_recording {
             let frameData = buildFrameData(frame: frame)
@@ -114,10 +130,23 @@ final class SceneDataRecorder : NSObject, SceneRecorder, ARSessionDelegate {
         }
     }
     
+    /// Ends recording and closes the file
+    func stopRecording() {
+        m_jsonWriter?.closeFile()
+        m_recording = false
+    }
+    
+    // MARK: Private Methods
+    
+    /// Returns the URL for the file location
+    /// - Returns: The file location URL
     private func getFileURL() -> URL? {
         return getBasePath()?.appendingPathComponent("\(name).json", isDirectory: false)
     }
     
+    /// Returns frame data to be added to the file from the given AR Frame.
+    /// - Parameter frame: AR Frame containing tracking data
+    /// - Returns: Json entry of the frame tracking data
     private func buildFrameData(frame: ARFrame) -> DataEntryJsonSchema {
         // get camera transform for position and rotation data
         let transform = frame.camera.transform

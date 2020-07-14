@@ -10,14 +10,16 @@ import Foundation
 import AVFoundation
 import ARKit
 
-class SceneAudioRecorderDecorator: SceneRecorder {
+/// Scene Recorder for audio recording. Uses decorator pattern.
+class SceneAudioRecorderDecorator : SceneRecorder {
     private let m_sceneRecorder: SceneRecorder
-    
     private var m_audioHandle: AVAudioRecorder?
     
     var isPrepared: Bool { get {return m_sceneRecorder.isPrepared}}
     var isRecording: Bool { get {return m_sceneRecorder.isRecording}}
     var name: String { get {return m_sceneRecorder.name}}
+    
+    // MARK: Constructor/Destructor
     
     init(sceneRecorder: SceneRecorder) throws {
         self.m_sceneRecorder = sceneRecorder
@@ -27,14 +29,31 @@ class SceneAudioRecorderDecorator: SceneRecorder {
         stopRecording()
     }
     
+    // MARK: Public Methods
+    
+    /// Returns the URL directory for the audio file.
+    /// - Returns: URL directory
     func getBasePath() -> URL? {
         return m_sceneRecorder.getBasePath()
     }
     
+    /// Returns true if any one of the files for this recorder and all containing recorders already exists.
+    /// - Returns: True if file exists. False if not.
     func doesFileExist() -> Bool {
-        return m_sceneRecorder.doesFileExist()
+        // if containing recorder file exists, then return true
+        if m_sceneRecorder.doesFileExist() {
+            return true
+        }
+        
+        // check if audio file exists
+        guard let audioFile = getFileURL() else {
+            return false
+        }
+        return FileManager.default.fileExists(atPath: audioFile.path)
     }
     
+    /// Prepares recording by creating the audio file.
+    /// - Throws: RecorderError if file cannot be created
     func prepareRecording() throws {
         // don't prepare if already prepared
         guard !isPrepared else {
@@ -42,7 +61,7 @@ class SceneAudioRecorderDecorator: SceneRecorder {
         }
         
         // create audio file
-        guard let audioFile = getBasePath()?.appendingPathComponent("\(name).m4a", isDirectory: false) else {
+        guard let audioFile = getFileURL() else {
             throw RecorderError.badURL
         }
         let settings = [
@@ -68,6 +87,8 @@ class SceneAudioRecorderDecorator: SceneRecorder {
         try m_sceneRecorder.prepareRecording()
     }
     
+    /// Starts the audio recording as well as starting the containing recorder.
+    /// - Throws: RecorderError if recording cannot be started
     func startRecording() throws {
         // Do nothing if recording has already started
         guard !isRecording else {
@@ -91,12 +112,26 @@ class SceneAudioRecorderDecorator: SceneRecorder {
         try m_sceneRecorder.startRecording()
     }
     
+    /// AR Session update method. Simply calls the method for the containing recorder since audio recording doesn't need
+    /// it.
+    /// - Parameters:
+    ///   - session: Current AR Session
+    ///   - frame: Current AR Frame
+    func sessionUpdate(_ session: ARSession, didUpdate frame: ARFrame) {
+        m_sceneRecorder.sessionUpdate(session, didUpdate: frame)
+    }
+    
+    /// Stops audio recording and stops containing scene recorder
     func stopRecording() {
         m_audioHandle?.stop()
         m_sceneRecorder.stopRecording()
     }
     
-    func sessionUpdate(_ session: ARSession, didUpdate frame: ARFrame) {
-        m_sceneRecorder.sessionUpdate(session, didUpdate: frame)
+    // MARK: Private Methods
+    
+    /// Returns the URL for the file location
+    /// - Returns: The file location URL
+    private func getFileURL() -> URL? {
+        return getBasePath()?.appendingPathComponent("\(name).m4a", isDirectory: false)
     }
 }

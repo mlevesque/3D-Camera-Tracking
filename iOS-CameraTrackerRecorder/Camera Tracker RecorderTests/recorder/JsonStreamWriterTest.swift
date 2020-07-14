@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import Camera_Tracker_Recorder
+@testable import Cam_Track_Rec
 
 class JsonStreamWriterTest: XCTestCase {
     override func setUp() {

@@ -8,16 +8,19 @@
 
 import Foundation
 
+/// Top level Json Schema.
+struct TrackingDataJsonSchema: Codable {
+    let data: [DataEntryJsonSchema]
+}
+
+/// Recording name values.
 struct RecordingNameJsonSchema: Codable {
     let projectName: String
     let scene: String
     let take: Int
 }
 
-struct TrackingDataJsonSchema: Codable {
-    let data: [DataEntryJsonSchema]
-}
-
+/// Json schema for a single tracking entry.
 struct DataEntryJsonSchema: Codable {
     let t: Double               // time slice
     let px, py, pz: Float       // position

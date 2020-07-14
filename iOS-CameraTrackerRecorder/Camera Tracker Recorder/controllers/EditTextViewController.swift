@@ -8,15 +8,16 @@
 
 import UIKit
 
-class EditTextViewController: UIViewController, UITextFieldDelegate {
+/// Controller for the edit project name popover view
+class EditTextViewController: UIViewController {
     
     private var projectName: String = ""
     private var sceneValue: String = ""
     private var takeValue: String = ""
     
-    @IBOutlet weak var projectText: UITextField!
-    @IBOutlet weak var sceneText: UITextField!
-    @IBOutlet weak var takeText: UITextField!
+    @IBOutlet var projectText: UITextField!
+    @IBOutlet var sceneText: UITextField!
+    @IBOutlet var takeText: UITextField!
     
     override func viewDidLoad() {
         projectText.delegate = self
@@ -28,50 +29,12 @@ class EditTextViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return false
-    }
-    
-    public func setText(project: String, scene: String, take: String) {
+    func setText(project: String, scene: String, take: String) {
         projectName = project
         sceneValue = scene
         takeValue = take
-    }
-    
-    @IBAction func onEditTextBegin(_ sender: Any) {
-        if let textField = sender as? UITextField {
-            textField.selectAll(nil)
-        }
-    }
-    
-    @IBAction func onProjectEditEnd(_ sender: Any) {
-        editEnd(textField: sender as? UITextField, valueRef: &projectName)
-    }
-    
-    @IBAction func onSceneEditEnd(_ sender: Any) {
-        editEnd(textField: sender as? UITextField, valueRef: &sceneValue)
-    }
-    
-    @IBAction func onTakeEditEnd(_ sender: Any) {
-        editEnd(textField: sender as? UITextField, valueRef: &takeValue)
-    }
-    
-    @IBAction func onTakeResetTouchUp(_ sender: Any) {
-        takeValue = "1"
-        takeText.text = takeValue
-    }
-    
-    @IBAction func onSaveTouchUp(_ sender: Any) {
-        notifyTextChange(useProject: true, useScene: true, useTake: true)
-        closeView()
-    }
-    
-    @IBAction func onCancelTouchUp(_ sender: Any) {
-        closeView()
     }
     
     func dismissKeypad() {
@@ -115,5 +78,50 @@ class EditTextViewController: UIViewController, UITextFieldDelegate {
     
     private func closeView() {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: UI TextField Delegate Methods
+
+extension EditTextViewController : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+}
+
+// MARK: UI Actions
+
+extension EditTextViewController {
+    @IBAction func onEditTextBegin(_ sender: Any) {
+        if let textField = sender as? UITextField {
+            textField.selectAll(nil)
+        }
+    }
+    
+    @IBAction func onProjectEditEnd(_ sender: Any) {
+        editEnd(textField: sender as? UITextField, valueRef: &projectName)
+    }
+    
+    @IBAction func onSceneEditEnd(_ sender: Any) {
+        editEnd(textField: sender as? UITextField, valueRef: &sceneValue)
+    }
+    
+    @IBAction func onTakeEditEnd(_ sender: Any) {
+        editEnd(textField: sender as? UITextField, valueRef: &takeValue)
+    }
+    
+    @IBAction func onTakeResetTouchUp(_ sender: Any) {
+        takeValue = "1"
+        takeText.text = takeValue
+    }
+    
+    @IBAction func onSaveTouchUp(_ sender: Any) {
+        notifyTextChange(useProject: true, useScene: true, useTake: true)
+        closeView()
+    }
+    
+    @IBAction func onCancelTouchUp(_ sender: Any) {
+        closeView()
     }
 }

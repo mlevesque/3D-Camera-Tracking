@@ -11,18 +11,18 @@ import SceneKit
 import ARKit
 import Foundation
 
-class MainViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
+class MainViewController: UIViewController {
     
     @IBOutlet var positionDisplays: [UILabel]!
     @IBOutlet var rotationDisplays: [UILabel]!
     @IBOutlet var qualityDisplay: UILabel!
     
     @IBOutlet var sceneView: ARSCNView!
-    @IBOutlet weak var recButton: UIButton!
+    @IBOutlet var recButton: UIButton!
     
-    @IBOutlet weak var projectText: UILabel!
-    @IBOutlet weak var sceneText: UILabel!
-    @IBOutlet weak var takeText: UILabel!
+    @IBOutlet var projectText: UILabel!
+    @IBOutlet var sceneText: UILabel!
+    @IBOutlet var takeText: UILabel!
     
     static let notificationName = Notification.Name("MainViewController")
     
@@ -108,82 +108,9 @@ class MainViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         }
     }
     
-    // MARK: - ARSCNViewDelegate
     
-/*
-    // Override to create and configure nodes for anchors added to the view's session.
-    func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
-        let node = SCNNode()
-     
-        return node
-    }
-*/
     
-    func session(_ session: ARSession, didFailWithError error: Error) {
-        // Present an error message to the user
-        
-    }
     
-    func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
-        
-    }
-    
-    func sessionInterruptionEnded(_ session: ARSession) {
-        // Reset tracking and/or remove existing anchors if consistent tracking is required
-        
-    }
-    
-    func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        let transform = frame.camera.transform
-        let p = vector3(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
-        let r = frame.camera.eulerAngles
-        
-        let formattedPos = (formatPosition(p.x), formatPosition(p.y), formatPosition(p.z))
-        positionDisplays[0].attributedText = formattedPos.0;
-        positionDisplays[1].attributedText = formattedPos.1;
-        positionDisplays[2].attributedText = formattedPos.2;
-        
-        let formattedRot = (formatRotation(r.x), formatRotation(r.y), formatRotation(r.z))
-        rotationDisplays[0].attributedText = formattedRot.0;
-        rotationDisplays[1].attributedText = formattedRot.1;
-        rotationDisplays[2].attributedText = formattedRot.2;
-        
-        qualityDisplay.attributedText = formatQuality(frame.camera.trackingState)
-        
-        sceneRecorder?.sessionUpdate(session, didUpdate: frame)
-    }
-    
-    @IBAction func onResetTouchUp(_ sender: Any) {
-        sceneView.session.pause()
-        let configuration = ARWorldTrackingConfiguration()
-        sceneView.session.run(configuration, options: [.resetTracking, .resetSceneReconstruction])
-        sceneView.debugOptions = [.showFeaturePoints, .showWorldOrigin]
-    }
-    
-    @IBAction func onRecordTouchUp(_ sender: Any) {
-        let isRecording = sceneRecorder?.isRecording ?? false
-        
-        do {
-            if isRecording {
-                // stop recording and save data
-                sceneRecorder?.stopRecording()
-                
-                // prepare for next take
-                incrementTake()
-            }
-            else {
-                // @TODO Add warning if overwriting file
-                try sceneRecorder?.startRecording()
-            }
-        }
-        catch {
-            // @TODO display error
-        }
-        
-        // update UI
-        updateRecordButton()
-    }
     
     private func incrementTake() {
         // increment value
@@ -202,17 +129,18 @@ class MainViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         
         // create new recorder with new name
         do {
-            var sceneDataRecorder: SceneRecorder = try SceneDataRecorder(name: getRecorderName())
+            var sceneDataRecorder: SceneRecorder
+                = try SceneDataRecorder(projectName: projectName, scene: sceneValue, take: takeValue)
             if useAudio {
                 sceneDataRecorder = try SceneAudioRecorderDecorator(sceneRecorder: sceneDataRecorder)
             }
             sceneRecorder = sceneDataRecorder
         }
         catch {
-            // @TODO display error
+            // TODO: display error
         }
         
-        // @TODO handle if file already exists with new name
+        // TODO: Handle if file already exists with new name
     }
     
     private func getRecorderName() -> String {
@@ -259,5 +187,87 @@ class MainViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate
         
         // update the UI
         updateText()
+    }
+}
+
+// MARK: AR Scene View Delegate Methods
+
+extension MainViewController : ARSCNViewDelegate {
+    /*
+        // Override to create and configure nodes for anchors added to the view's session.
+        func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
+            let node = SCNNode()
+         
+            return node
+        }
+    */
+}
+
+// MARK: AR Session Delegate Methods
+
+extension MainViewController : ARSessionDelegate {
+    func session(_ session: ARSession, didFailWithError error: Error) {
+        // Present an error message to the user
+    }
+    
+    func sessionWasInterrupted(_ session: ARSession) {
+        // Inform the user that the session has been interrupted, for example, by presenting an overlay
+    }
+    
+    func sessionInterruptionEnded(_ session: ARSession) {
+        // Reset tracking and/or remove existing anchors if consistent tracking is required
+    }
+    
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        let transform = frame.camera.transform
+        let p = vector3(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
+        let r = frame.camera.eulerAngles
+        
+        positionDisplays[0].attributedText = formatPosition(p.x)
+        positionDisplays[1].attributedText = formatPosition(p.y)
+        positionDisplays[2].attributedText = formatPosition(p.z)
+        
+        rotationDisplays[0].attributedText = formatRotation(r.x)
+        rotationDisplays[1].attributedText = formatRotation(r.y)
+        rotationDisplays[2].attributedText = formatRotation(r.z)
+        
+        qualityDisplay.attributedText = formatQuality(frame.camera.trackingState)
+        
+        sceneRecorder?.sessionUpdate(session, didUpdate: frame)
+    }
+}
+
+// MARK: UI Actions
+
+extension MainViewController {
+    @IBAction func onResetOriginTouchUp(_ sender: Any) {
+        sceneView.session.pause()
+        let configuration = ARWorldTrackingConfiguration()
+        sceneView.session.run(configuration, options: [.resetTracking, .resetSceneReconstruction])
+        sceneView.debugOptions = [.showFeaturePoints, .showWorldOrigin]
+    }
+    
+    @IBAction func onRecordTouchUp(_ sender: Any) {
+        let isRecording = sceneRecorder?.isRecording ?? false
+        
+        do {
+            if isRecording {
+                // stop recording and save data
+                sceneRecorder?.stopRecording()
+                
+                // prepare for next take
+                incrementTake()
+            }
+            else {
+                // @TODO Add warning if overwriting file
+                try sceneRecorder?.startRecording()
+            }
+        }
+        catch {
+            // @TODO display error
+        }
+        
+        // update UI
+        updateRecordButton()
     }
 }

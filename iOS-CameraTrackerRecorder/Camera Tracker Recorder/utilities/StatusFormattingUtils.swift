@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import ARKit
 
+// text attributes
 fileprivate let posNumAtt: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 14)]
 fileprivate let posUnitAtt: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 10)]
 fileprivate let rotNumAtt: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 14)]
@@ -21,6 +22,9 @@ fileprivate let qualityCautionAtt: [NSAttributedString.Key: Any] = [.font: UIFon
 fileprivate let qualityBadAtt: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 14),
                                                                 .foregroundColor: UIColor.red]
 
+/// Returns formatted text for the given position value.
+/// - Parameter value: position value
+/// - Returns: formatted text for the position
 func formatPosition(_ value: Float) -> NSAttributedString {
     let result = NSMutableAttributedString()
     result.append(NSAttributedString(string: String(format: "%.2f", value), attributes: posNumAtt))
@@ -28,6 +32,9 @@ func formatPosition(_ value: Float) -> NSAttributedString {
     return result
 }
 
+/// Returns formatted text for the given rotation value.
+/// - Parameter value: rotation value
+/// - Returns: formatted text for the rotation
 func formatRotation(_ value: Float) -> NSAttributedString {
     let val = Int(round((180.0 / .pi) * value))
     let result = NSMutableAttributedString()
@@ -36,6 +43,9 @@ func formatRotation(_ value: Float) -> NSAttributedString {
     return result
 }
 
+/// Returns formatted text for the given tracking state status.
+/// - Parameter trackingState: tracking state status
+/// - Returns: formatted text for the tracking status
 func formatQuality(_ trackingState: ARCamera.TrackingState) -> NSAttributedString {
     switch trackingState {
         case .normal:

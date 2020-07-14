@@ -23,6 +23,6 @@ protocol SceneRecorder {
     func doesFileExist() -> Bool
     func prepareRecording() throws
     func startRecording() throws
-    func stopRecording()
     func sessionUpdate(_ session: ARSession, didUpdate frame: ARFrame)
+    func stopRecording()
 }
