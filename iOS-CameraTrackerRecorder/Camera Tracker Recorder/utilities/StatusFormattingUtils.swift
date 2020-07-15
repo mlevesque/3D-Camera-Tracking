@@ -15,12 +15,12 @@ fileprivate let posNumAtt: [NSAttributedString.Key: Any] = [.font: UIFont.system
 fileprivate let posUnitAtt: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 10)]
 fileprivate let rotNumAtt: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 14)]
 fileprivate let rotUnitAtt: [NSAttributedString.Key: Any] = [.font: UIFont.systemFont(ofSize: 14)]
-fileprivate let qualityGoodAtt: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 14),
-                                                                 .foregroundColor: UIColor.green]
-fileprivate let qualityCautionAtt: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 14),
-                                                                    .foregroundColor: UIColor.yellow]
-fileprivate let qualityBadAtt: [NSAttributedString.Key: Any] = [.font: UIFont.boldSystemFont(ofSize: 14),
-                                                                .foregroundColor: UIColor.red]
+fileprivate let qualityGoodAtt: [NSAttributedString.Key: Any]
+    = [.font: UIFont.boldSystemFont(ofSize: 14), .foregroundColor: UIColor(named: "status_green") ?? UIColor.green]
+fileprivate let qualityCautionAtt: [NSAttributedString.Key: Any]
+    = [.font: UIFont.boldSystemFont(ofSize: 14), .foregroundColor: UIColor(named: "status_yellow") ?? UIColor.yellow]
+fileprivate let qualityBadAtt: [NSAttributedString.Key: Any]
+    = [.font: UIFont.boldSystemFont(ofSize: 14), .foregroundColor: UIColor(named: "status_red") ?? UIColor.red]
 
 /// Returns formatted text for the given position value.
 /// - Parameter value: position value
