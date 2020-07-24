@@ -104,6 +104,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3307A7D624CAC99500FAB03C /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				33EA48D422CB4372001AD43C /* Main.storyboard */,
+				33EA48D722CB4373001AD43C /* Assets.xcassets */,
+				33EA48D922CB4373001AD43C /* LaunchScreen.storyboard */,
+				33E01A8924BE44B1004EB73F /* Config.plist */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
 		330F4E6D2305CCB3009A767E /* utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,16 +188,13 @@
 		33EA48CD22CB4372001AD43C /* Camera Tracker Recorder */ = {
 			isa = PBXGroup;
 			children = (
+				33EA48DC22CB4373001AD43C /* Info.plist */,
+				3307A7D624CAC99500FAB03C /* resources */,
 				330F4E6D2305CCB3009A767E /* utilities */,
 				33B6E2102302F218004ABC73 /* model */,
 				33B6E20D2302CA67004ABC73 /* controllers */,
 				33B6E20C2302CA2C004ABC73 /* recorder */,
 				33EA48CE22CB4372001AD43C /* AppDelegate.swift */,
-				33EA48D422CB4372001AD43C /* Main.storyboard */,
-				33EA48D722CB4373001AD43C /* Assets.xcassets */,
-				33EA48D922CB4373001AD43C /* LaunchScreen.storyboard */,
-				33EA48DC22CB4373001AD43C /* Info.plist */,
-				33E01A8924BE44B1004EB73F /* Config.plist */,
 			);
 			path = "Camera Tracker Recorder";
 			sourceTree = "<group>";
