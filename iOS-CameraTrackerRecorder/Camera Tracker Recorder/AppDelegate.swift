@@ -45,10 +45,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // If the application was previously in the background, optionally refresh the user interface.
         
         // Set up persistence
-        PersistentData.shared.setup()
+        let persist = PersistentData.shared
+        persist.setup()
         
-        let data = PersistentData.shared.getNameData()
-        print("\(data.projectName) \(data.scene) \(data.take)")
+        // Ensure that current values for name data are all valid. If not, then revert to default value
+        let nameData = persist.getNameData()
+        if !Validations.isProjectNameValid(nameData.projectName) {
+            persist.setValue(ConfigWrapper.getString(withKey: "defaultProjectName"), forKey: .projectName)
+        }
+        if !Validations.isSceneValid(nameData.scene) {
+            persist.setValue(ConfigWrapper.getString(withKey: "defaultScene"), forKey: .scene)
+        }
+        if !Validations.isTakeValid("\(nameData.take)") {
+            persist.setValue(ConfigWrapper.getInt(withKey: "defaultTake"), forKey: .take)
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
