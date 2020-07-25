@@ -18,6 +18,7 @@ class EditTextViewController: UIViewController {
     override func viewDidLoad() {
         projectText.delegate = self
         sceneText.delegate = self
+        takeText.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,9 +42,31 @@ class EditTextViewController: UIViewController {
     }
 }
 
-// MARK: UI TextField Delegate Methods
+// MARK: UI TextField Methods
 
 extension EditTextViewController : UITextFieldDelegate {
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
+        // form the full string
+        let str: String = textField.text ?? ""
+        let p1 = str.index(str.startIndex, offsetBy: range.lowerBound)
+        let p2 = str.index(str.startIndex, offsetBy: range.upperBound)
+        let fullString = String(str[str.startIndex..<p1]) + string + String(str[p2..<str.endIndex])
+        
+        // perform validation
+        if textField == projectText {
+            return Validations.isProjectNameValid(fullString)
+        }
+        else if textField == sceneText {
+            return Validations.isSceneValid(fullString)
+        }
+        else if textField == takeText {
+            return Validations.isTakeValid(fullString)
+        }
+        return true
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
