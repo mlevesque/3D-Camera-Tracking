@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3344F28124CACE1800D79B7B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3344F28024CACE1800D79B7B /* Settings.bundle */; };
 		33A83AEB244B69DC007760CD /* StatusFormattingUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A83AEA244B69DC007760CD /* StatusFormattingUtils.swift */; };
 		33B6E1B122F905B9004ABC73 /* EditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B6E1B022F905B9004ABC73 /* EditTextViewController.swift */; };
 		33B6E1B322FF1093004ABC73 /* TextKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B6E1B222FF1093004ABC73 /* TextKeys.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3344F28024CACE1800D79B7B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		33A83AEA244B69DC007760CD /* StatusFormattingUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusFormattingUtils.swift; sourceTree = "<group>"; };
 		33B6E1B022F905B9004ABC73 /* EditTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
 		33B6E1B222FF1093004ABC73 /* TextKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextKeys.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				33EA48D722CB4373001AD43C /* Assets.xcassets */,
 				33EA48D922CB4373001AD43C /* LaunchScreen.storyboard */,
 				33E01A8924BE44B1004EB73F /* Config.plist */,
+				3344F28024CACE1800D79B7B /* Settings.bundle */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 			files = (
 				33E01A8A24BE44B1004EB73F /* Config.plist in Resources */,
 				33EA48DB22CB4373001AD43C /* LaunchScreen.storyboard in Resources */,
+				3344F28124CACE1800D79B7B /* Settings.bundle in Resources */,
 				33EA48D822CB4373001AD43C /* Assets.xcassets in Resources */,
 				33EA48D622CB4372001AD43C /* Main.storyboard in Resources */,
 			);

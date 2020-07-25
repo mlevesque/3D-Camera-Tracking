@@ -15,31 +15,24 @@ class EditTextViewController: UIViewController {
     @IBOutlet var sceneText: UITextField!
     @IBOutlet var takeText: UITextField!
     
-    private var originalData: NameData?
-    
     override func viewDidLoad() {
         projectText.delegate = self
         sceneText.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        projectText.text = originalData?.projectName
-        sceneText.text = originalData?.scene
-        takeText.text = String(originalData?.take ?? 0)
-    }
-    
-    /// Sets the text fields using the given name data
-    /// - Parameter nameData:
-    func setNameData(_ nameData: NameData) {
-        originalData = nameData
+        let nameData = PersistentData.shared.getNameData()
+        projectText.text = nameData.projectName
+        sceneText.text = nameData.scene
+        takeText.text = "\(nameData.take)"
     }
     
     /// Returns a name data object from the text field values
     /// - Returns:
     func getNameData() -> NameData {
         return NameData(
-            projectName: projectText.text,
-            scene: sceneText.text,
+            projectName: projectText.text ?? "",
+            scene: sceneText.text ?? "",
             take: Int(takeText.text ?? "1") ?? 1)
     }
     

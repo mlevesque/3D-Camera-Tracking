@@ -33,7 +33,7 @@ class MainViewController: UIViewController {
     @IBOutlet var takeText: UILabel!
     
     private var sceneRecorder: SceneRecorder?
-    private var data: PersistentData = PersistentData()
+    private var useAudio = false
     private var audioIsSetup = false
     
     override func viewDidLoad() {
@@ -46,87 +46,47 @@ class MainViewController: UIViewController {
         sceneView.scene = scene
         sceneView.session.delegate = self
         
-        changeNameData(data.nameData)
-        
         // set useAudio as false until audio can be set up
-        let useAudio = data.settings.useAudio
-        data.settings.useAudio = false
-        ToggleAudioRecording(useAudio)
+        useAudio = false
+        let shouldUseAudio = PersistentData.shared.getBool(forKey: .useAudio)
+        prepareRecorder(shouldUseAudio: shouldUseAudio)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        updateTextUI()
+        
         let configuration = ARWorldTrackingConfiguration()
         sceneView.session.run(configuration)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        // setup listener for persist data changes
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onPersistDataChanged),
+            name: UserDefaults.didChangeNotification,
+            object: nil)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        // remove listeners
+        NotificationCenter.default.removeObserver(self)
+        
         sceneView.session.pause()
         stopRecording()
     }
     
-    /// Prepare for segue transition.
-    /// - Parameters:
-    ///   - segue:
-    ///   - sender: 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // if we are seguing to the edit text view, send over the recording text
-        switch segue.destination {
-        case let con as EditTextViewController:
-            con.setNameData(data.nameData)
-        default:
-            break
-        }
-        
-        // set the presentation delegate to self
-        // this lets us capture the event when the new view controller is dismissed by swiping
-        segue.destination.presentationController?.delegate = self
-    }
-    
-    /// Changes the name data to the given data. Any recording will stop, a new recorder will be prepared, and UI
-    /// will be updated.
-    /// - Parameters:
-    ///   - nameData
-    func changeNameData(_ nameData: NameData) {
-        // stop recording in case we are
-        stopRecording()
-        
-        // set updated data
-        data.nameData = nameData
-        
+    /// Triggered when any persistent data has changed. This will update the UI and recorder.
+    @objc func onPersistDataChanged() {
         // reinitialize recorder
-        prepareRecorder()
+        prepareRecorder(shouldUseAudio: PersistentData.shared.getBool(forKey: .useAudio))
         
         // update UI
-        updateRecordButtonUI()
         updateTextUI()
-    }
-    
-    /// Toggles audio recording. If toggled on for the first time since the app started, then will set up audio and
-    /// get permission if needed
-    /// - Parameter value: useAudio flag
-    func ToggleAudioRecording(_ value: Bool) {
-        // if enabled, setup for audio recording
-        if value && !audioIsSetup {
-            let audioSession = AVAudioSession.sharedInstance()
-            do {
-                try audioSession.setCategory(.playAndRecord, mode: .default)
-                try audioSession.setActive(true)
-                audioSession.requestRecordPermission() { [unowned self] allowed in
-                    DispatchQueue.main.async {
-                        self.audioIsSetup = true
-                        self.ToggleAudioRecording(allowed)
-                    }
-                }
-            } catch {
-                ToggleAudioRecording(false)
-            }
-        }
-        else {
-            data.settings.useAudio = value
-            prepareRecorder()
-        }
     }
     
     /// Restarts the AR session to reset the world origin.
@@ -137,6 +97,31 @@ class MainViewController: UIViewController {
         sceneView.debugOptions = [.showFeaturePoints, .showWorldOrigin]
     }
     
+    /// Will display a prompt to the user indicating that the current name data will cause a new recording to overwrite
+    /// an existing recording file.
+    func showFileExistsPromptBeforeRecording() {
+        // Initialize Alert Controller
+        let title = getConfigString(withKey: "overwriteAlertTitle")
+        let description = getConfigString(withKey: "overwriteAlertDescription")
+        let alertController = UIAlertController(title: title, message: description, preferredStyle: .alert)
+        
+        // Initialize Actions
+        let yesTitle = getConfigString(withKey: "overwriteAlertActionOverwrite")
+        let yesAction = UIAlertAction(title: yesTitle, style: .destructive) { (action) -> Void in
+            self.startRecording()
+        }
+        let noTitle = getConfigString(withKey: "overwriteAlertActionCancel")
+        let noAction = UIAlertAction(title: noTitle, style: .cancel) { (action) -> Void in
+        }
+         
+        // Add Actions
+        alertController.addAction(yesAction)
+        alertController.addAction(noAction)
+         
+        // Present Alert Controller
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
     /// Starts recording and updates UI
     func startRecording() {
         guard sceneRecorder?.isRecording == false else {
@@ -144,7 +129,6 @@ class MainViewController: UIViewController {
         }
         
         do {
-            // TODO: Check if file exists
             try sceneRecorder?.startRecording()
         }
         catch {
@@ -165,32 +149,60 @@ class MainViewController: UIViewController {
         }
         recorder.stopRecording()
         
-        // increment take - Record button will be updated in the changeNameData call
-        let d = data.nameData
-        changeNameData(NameData(projectName: d.projectName, scene: d.scene, take: Int(d.take) + 1))
-        
         // update UI
         settingsButton.isEnabled = true
         editNameButton.isEnabled = true
         resetOriginButton.isEnabled = true
+        
+        // increment take - Record button will be updated in the changeNameData call
+        let take = PersistentData.shared.getInt(forKey: .take)
+        PersistentData.shared.setValue(take + 1, forKey: .take)
     }
     
     /// Initializes a new instance for the recorder using the current name data
-    private func prepareRecorder() {
+    /// - Parameter shouldUseAudio: Whether to setup the recording with audio or not
+    private func prepareRecorder(shouldUseAudio: Bool) {
         // stop and previous recording
         sceneRecorder?.stopRecording()
-        
-        // create new recorder with new name
-        do {
-            var sceneDataRecorder: SceneRecorder
-                = try SceneDataRecorder(nameData: data.nameData)
-            if data.settings.useAudio {
-                sceneDataRecorder = try SceneAudioRecorderDecorator(sceneRecorder: sceneDataRecorder)
-            }
-            sceneRecorder = sceneDataRecorder
+
+        // determine if audio should be enabled
+        if shouldUseAudio && !audioIsSetup {
+            setupRecordingForAudio()
         }
-        catch {
-            // TODO: display error
+        else {
+            // create new recorder with new name
+            let nameData = PersistentData.shared.getNameData()
+            do {
+                var sceneDataRecorder: SceneRecorder
+                    = try SceneDataRecorder(nameData: nameData)
+                if shouldUseAudio {
+                    sceneDataRecorder = try SceneAudioRecorderDecorator(sceneRecorder: sceneDataRecorder)
+                }
+                sceneRecorder = sceneDataRecorder
+                
+                // update record button
+                updateRecordButtonUI()
+            }
+            catch {
+                // TODO: display error
+            }
+        }
+    }
+    
+    /// Handle asking for permission to use the microphone, then will prepare recording appropriately.
+    private func setupRecordingForAudio() {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playAndRecord, mode: .default)
+            try audioSession.setActive(true)
+            audioSession.requestRecordPermission() { [unowned self] allowed in
+                DispatchQueue.main.async {
+                    self.audioIsSetup = true
+                    self.prepareRecorder(shouldUseAudio:allowed && PersistentData.shared.getBool(forKey:.useAudio))
+                }
+            }
+        } catch {
+            prepareRecorder(shouldUseAudio: false)
         }
     }
     
@@ -224,7 +236,7 @@ class MainViewController: UIViewController {
     
     /// Updates the look of the Text UI
     private func updateTextUI() {
-        let d = data.nameData
+        let d = PersistentData.shared.getNameData()
         projectText.text = d.projectName
         sceneText.text = d.scene
         takeText.text = "\(d.take)"
@@ -278,29 +290,56 @@ extension MainViewController : ARSessionDelegate {
     }
 }
 
-// MARK: Adaptive Presentation Controller Delegate Methods
+// MARK: Methods transitioning to and from Main View
 
 extension MainViewController : UIAdaptivePresentationControllerDelegate {
+    /// Prepare for segue transition.
+    /// - Parameters:
+    ///   - segue:
+    ///   - sender:
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // set the presentation delegate to self
+        // this lets us capture the event when the new view controller is dismissed by swiping
+        segue.destination.presentationController?.delegate = self
+    }
     
     /// Triggered when the user dismisses a popover view with a swipe.
     /// - Parameter presentationController:
     func presentationControllerWillDismiss(_ presentationController: UIPresentationController) {
         switch presentationController.presentedViewController {
         case let con as EditTextViewController:
-            changeNameData(con.getNameData())
+            PersistentData.shared.setNameData(con.getNameData())
         default:
             break
         }
+    }
+    
+    /// Triggers when returning to Main View from the Edit Name Data View.
+    /// - Parameter unwindSegue:
+    @IBAction func unwindFromEdit(_ unwindSegue: UIStoryboardSegue) {
+        if let con = unwindSegue.source as? EditTextViewController {
+            PersistentData.shared.setNameData(con.getNameData())
+        }
+    }
+    
+    /// Triggers when returning to Main View from the Settings View.
+    /// - Parameter unwindSegue:
+    @IBAction func unwindFromSettings(_ unwindSegue: UIStoryboardSegue) {
     }
 }
 
 // MARK: UI Actions
 
 extension MainViewController {
+    
+    /// Triggered when the Reset Origin button is tapped.
+    /// - Parameter sender:
     @IBAction func onResetOriginTouchUp(_ sender: Any) {
         resetOrigin()
     }
     
+    /// Triggered when the Record button is tapped.
+    /// - Parameter sender:
     @IBAction func onRecordTouchUp(_ sender: Any) {
         guard sceneRecorder != nil else {
             return
@@ -310,26 +349,7 @@ extension MainViewController {
         let recorder = sceneRecorder!
         if (!recorder.isRecording) {
             if sceneRecorder!.doesFileExist() {
-                // Initialize Alert Controller
-                let title = getConfigString(withKey: "overwriteAlertTitle")
-                let description = getConfigString(withKey: "overwriteAlertDescription")
-                let alertController = UIAlertController(title: title, message: description, preferredStyle: .alert)
-                
-                // Initialize Actions
-                let yesTitle = getConfigString(withKey: "overwriteAlertActionOverwrite")
-                let yesAction = UIAlertAction(title: yesTitle, style: .destructive) { (action) -> Void in
-                    self.startRecording()
-                }
-                let noTitle = getConfigString(withKey: "overwriteAlertActionCancel")
-                let noAction = UIAlertAction(title: noTitle, style: .cancel) { (action) -> Void in
-                }
-                 
-                // Add Actions
-                alertController.addAction(yesAction)
-                alertController.addAction(noAction)
-                 
-                // Present Alert Controller
-                self.present(alertController, animated: true, completion: nil)
+                showFileExistsPromptBeforeRecording()
             }
             else {
                 startRecording()
@@ -338,14 +358,5 @@ extension MainViewController {
         else {
             stopRecording()
         }
-    }
-    
-    @IBAction func unwindFromEdit(_ unwindSegue: UIStoryboardSegue) {
-        if let con = unwindSegue.source as? EditTextViewController {
-            changeNameData(con.getNameData())
-        }
-    }
-    
-    @IBAction func unwindFromSettings(_ unwindSegue: UIStoryboardSegue) {
     }
 }
