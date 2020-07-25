@@ -14,36 +14,6 @@
 		</dict>
 		<dict>
 			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Project Name</string>
-			<key>Key</key>
-			<string>projectName</string>
-			<key>DefaultValue</key>
-			<string>MyProject</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Scene</string>
-			<key>Key</key>
-			<string>scene</string>
-			<key>DefaultValue</key>
-			<string>1</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSTextFieldSpecifier</string>
-			<key>Title</key>
-			<string>Take</string>
-			<key>Key</key>
-			<string>take</string>
-			<key>DefaultValue</key>
-			<string>1</string>
-		</dict>
-		<dict>
-			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
 			<string>Use Audio</string>

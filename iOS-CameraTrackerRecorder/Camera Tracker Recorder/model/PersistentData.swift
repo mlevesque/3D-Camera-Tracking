@@ -47,12 +47,15 @@ class PersistentData {
         }
         
         // register fields to UserDefaults
-        var defaults = [String : AnyObject]()
+        var defaults = [String : Any]()
         for pref in preferences {
             if let key = pref["Key"] as? String, let val = pref["DefaultValue"] {
                 defaults[key] = val
             }
         }
+        defaults[DefaultsKey.projectName.rawValue] = ConfigWrapper.getString(withKey: "defaultProjectName")
+        defaults[DefaultsKey.scene.rawValue] = ConfigWrapper.getString(withKey: "defaultScene")
+        defaults[DefaultsKey.take.rawValue] = ConfigWrapper.getInt(withKey: "defaultTake")
         UserDefaults.standard.register(defaults: defaults)
         UserDefaults.standard.synchronize()
     }
