@@ -49,25 +49,25 @@ func formatRotation(_ value: Float) -> NSAttributedString {
 func formatQuality(_ trackingState: ARCamera.TrackingState) -> NSAttributedString {
     switch trackingState {
         case .normal:
-            let text = getConfigString(withKey: "trackStatusGood")
+            let text = ConfigWrapper.getString(withKey: "trackStatusGood")
             return NSAttributedString(string: text, attributes: qualityGoodAtt)
         case .limited(.excessiveMotion):
-            let text = getConfigString(withKey: "trackStatusExcessiveMotion")
+            let text = ConfigWrapper.getString(withKey: "trackStatusExcessiveMotion")
             return NSAttributedString(string: text, attributes: qualityCautionAtt)
         case .limited(.initializing):
-            let text = getConfigString(withKey: "trackStatusInitializing")
+            let text = ConfigWrapper.getString(withKey: "trackStatusInitializing")
             return NSAttributedString(string: text, attributes: qualityCautionAtt)
         case .limited(.insufficientFeatures):
-            let text = getConfigString(withKey: "trackStatusNotEnoughFeatures")
+            let text = ConfigWrapper.getString(withKey: "trackStatusNotEnoughFeatures")
             return NSAttributedString(string: text, attributes: qualityCautionAtt)
         case .limited(.relocalizing):
-            let text = getConfigString(withKey: "trackStatusRelocalizing")
+            let text = ConfigWrapper.getString(withKey: "trackStatusRelocalizing")
             return NSAttributedString(string: text, attributes: qualityCautionAtt)
         case .limited(_):
-            let text = getConfigString(withKey: "trackStatusLimited")
+            let text = ConfigWrapper.getString(withKey: "trackStatusLimited")
             return NSAttributedString(string: text, attributes: qualityCautionAtt)
         case .notAvailable:
-            let text = getConfigString(withKey: "trackStatusNotAvailable")
+            let text = ConfigWrapper.getString(withKey: "trackStatusNotAvailable")
             return NSAttributedString(string: text, attributes: qualityBadAtt)
     }
 }

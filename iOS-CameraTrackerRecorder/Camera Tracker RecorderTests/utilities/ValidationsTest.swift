@@ -72,9 +72,9 @@ class ValidationsTest : XCTestCase {
     }
     
     func testDefaultValueValidations() {
-        let projectName = getConfigString(withKey: "defaultProjectName")
-        let scene = getConfigString(withKey: "defaultScene")
-        let take = getConfigInt(withKey: "defaultTake")
+        let projectName = ConfigWrapper.getString(withKey: "defaultProjectName")
+        let scene = ConfigWrapper.getString(withKey: "defaultScene")
+        let take = ConfigWrapper.getInt(withKey: "defaultTake")
         XCTAssertTrue(Validations.isProjectNameValid(projectName))
         XCTAssertTrue(Validations.isSceneValid(scene))
         XCTAssertTrue(Validations.isTakeValid("\(take)"))

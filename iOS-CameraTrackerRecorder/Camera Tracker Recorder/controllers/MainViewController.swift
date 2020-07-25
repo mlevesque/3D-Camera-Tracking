@@ -101,16 +101,16 @@ class MainViewController: UIViewController {
     /// an existing recording file.
     func showFileExistsPromptBeforeRecording() {
         // Initialize Alert Controller
-        let title = getConfigString(withKey: "overwriteAlertTitle")
-        let description = getConfigString(withKey: "overwriteAlertDescription")
+        let title = ConfigWrapper.getString(withKey: "overwriteAlertTitle")
+        let description = ConfigWrapper.getString(withKey: "overwriteAlertDescription")
         let alertController = UIAlertController(title: title, message: description, preferredStyle: .alert)
         
         // Initialize Actions
-        let yesTitle = getConfigString(withKey: "overwriteAlertActionOverwrite")
+        let yesTitle = ConfigWrapper.getString(withKey: "overwriteAlertActionOverwrite")
         let yesAction = UIAlertAction(title: yesTitle, style: .destructive) { (action) -> Void in
             self.startRecording()
         }
-        let noTitle = getConfigString(withKey: "overwriteAlertActionCancel")
+        let noTitle = ConfigWrapper.getString(withKey: "overwriteAlertActionCancel")
         let noAction = UIAlertAction(title: noTitle, style: .cancel) { (action) -> Void in
         }
          
@@ -216,14 +216,14 @@ class MainViewController: UIViewController {
         
         // display button as stop button if currently recording
         if isRecording {
-            let title = getConfigString(withKey: "recordButtonTitleStop")
+            let title = ConfigWrapper.getString(withKey: "recordButtonTitleStop")
             recButton.backgroundColor = UIColor.gray
             recButton.setTitle(title, for: UIControl.State.normal)
         }
             
         // display as red record button if not currently recording
         else {
-            let title = getConfigString(withKey: "recordButtonTitleRecord")
+            let title = ConfigWrapper.getString(withKey: "recordButtonTitleRecord")
             recButton.backgroundColor = UIColor.red
             recButton.setTitle(title, for: UIControl.State.normal)
             

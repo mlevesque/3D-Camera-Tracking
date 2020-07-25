@@ -23,7 +23,7 @@
 		33E01A8624BDC1D0004EB73F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E01A8524BDC1D0004EB73F /* SettingsViewController.swift */; };
 		33E01A8824BE0510004EB73F /* PersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E01A8724BE0510004EB73F /* PersistentData.swift */; };
 		33E01A8A24BE44B1004EB73F /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 33E01A8924BE44B1004EB73F /* Config.plist */; };
-		33E01A8C24BE4701004EB73F /* ValueLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E01A8B24BE4701004EB73F /* ValueLookup.swift */; };
+		33E01A8C24BE4701004EB73F /* ConfigWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E01A8B24BE4701004EB73F /* ConfigWrapper.swift */; };
 		33EA48CF22CB4372001AD43C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA48CE22CB4372001AD43C /* AppDelegate.swift */; };
 		33EA48D322CB4372001AD43C /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA48D222CB4372001AD43C /* MainViewController.swift */; };
 		33EA48D622CB4372001AD43C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33EA48D422CB4372001AD43C /* Main.storyboard */; };
@@ -67,7 +67,7 @@
 		33E01A8524BDC1D0004EB73F /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		33E01A8724BE0510004EB73F /* PersistentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentData.swift; sourceTree = "<group>"; };
 		33E01A8924BE44B1004EB73F /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
-		33E01A8B24BE4701004EB73F /* ValueLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValueLookup.swift; sourceTree = "<group>"; };
+		33E01A8B24BE4701004EB73F /* ConfigWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigWrapper.swift; sourceTree = "<group>"; };
 		33EA48CB22CB4372001AD43C /* Cam Track Rec.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Cam Track Rec.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33EA48CE22CB4372001AD43C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33EA48D222CB4372001AD43C /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				33A83AEA244B69DC007760CD /* StatusFormattingUtils.swift */,
-				33E01A8B24BE4701004EB73F /* ValueLookup.swift */,
+				33E01A8B24BE4701004EB73F /* ConfigWrapper.swift */,
 				33B4899724CBD72E00821EB1 /* Validations.swift */,
 			);
 			path = utilities;
@@ -376,7 +376,7 @@
 				33B6E2122302F23E004ABC73 /* JsonSchemas.swift in Sources */,
 				33EA48CF22CB4372001AD43C /* AppDelegate.swift in Sources */,
 				33BA36F522F6D1BB00A44EFF /* SceneAudioRecorderDecorator.swift in Sources */,
-				33E01A8C24BE4701004EB73F /* ValueLookup.swift in Sources */,
+				33E01A8C24BE4701004EB73F /* ConfigWrapper.swift in Sources */,
 				33BA36F122F115D000A44EFF /* SceneRecorder.swift in Sources */,
 				33E01A8624BDC1D0004EB73F /* SettingsViewController.swift in Sources */,
 			);
