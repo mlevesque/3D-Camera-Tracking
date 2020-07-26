@@ -25,13 +25,13 @@
                                 <rect key="frame" x="10" y="10" width="235" height="80"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="osV-US-zlo" userLabel="Entry Stacks">
-                                        <rect key="frame" x="5" y="5" width="227.5" height="67"/>
+                                        <rect key="frame" x="5" y="5" width="227.5" height="66.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="45p-iM-6Jy" userLabel="Position Stack">
-                                                <rect key="frame" x="0.0" y="0.0" width="227.5" height="20"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="227.5" height="19.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_position" translatesAutoresizingMaskIntoConstraints="NO" id="yrp-uj-Dw2">
-                                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="20" height="19.5"/>
                                                         <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="20" id="xwt-Q7-IbP"/>
@@ -39,13 +39,13 @@
                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small" weight="regular"/>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5K-Lm-7VV" userLabel="px Label">
-                                                        <rect key="frame" x="25" y="0.0" width="9" height="20"/>
+                                                        <rect key="frame" x="25" y="0.0" width="9" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                         <color key="textColor" name="status_red"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0cm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E18-E3-bfx" userLabel="px Value">
-                                                        <rect key="frame" x="39" y="0.0" width="50" height="20"/>
+                                                        <rect key="frame" x="39" y="0.0" width="50" height="19.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="X2C-bc-5bE"/>
                                                         </constraints>
@@ -53,13 +53,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="y" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzx-7I-0jL" userLabel="py Label">
-                                                        <rect key="frame" x="94" y="0.0" width="9.5" height="20"/>
+                                                        <rect key="frame" x="94" y="0.0" width="9.5" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                         <color key="textColor" name="status_green"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0cm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9WC-Zy-Vdn" userLabel="py Value">
-                                                        <rect key="frame" x="108.5" y="0.0" width="50" height="20"/>
+                                                        <rect key="frame" x="108.5" y="0.0" width="50" height="19.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="zd5-UK-eKd"/>
                                                         </constraints>
@@ -67,13 +67,13 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="z" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Sw-A9-KbT" userLabel="pz Label">
-                                                        <rect key="frame" x="163.5" y="0.0" width="9" height="20"/>
+                                                        <rect key="frame" x="163.5" y="0.0" width="9" height="19.5"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                         <color key="textColor" name="status_blue"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0cm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gwD-41-qTE" userLabel="pz Value">
-                                                        <rect key="frame" x="177.5" y="0.0" width="50" height="20"/>
+                                                        <rect key="frame" x="177.5" y="0.0" width="50" height="19.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="Xu1-pz-Hkd"/>
                                                         </constraints>
@@ -83,7 +83,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="4mL-2z-F0J" userLabel="Rotation Stack">
-                                                <rect key="frame" x="0.0" y="24" width="227.5" height="19.5"/>
+                                                <rect key="frame" x="0.0" y="23.5" width="227.5" height="19.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_rotation" translatesAutoresizingMaskIntoConstraints="NO" id="MA0-aq-79K">
                                                         <rect key="frame" x="0.0" y="0.0" width="20" height="19.5"/>
@@ -138,7 +138,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0ho-c9-oV2" userLabel="Quality Stack">
-                                                <rect key="frame" x="0.0" y="47.5" width="100.5" height="19.5"/>
+                                                <rect key="frame" x="0.0" y="47" width="100.5" height="19.5"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_quality" translatesAutoresizingMaskIntoConstraints="NO" id="Kba-tz-z3Z">
                                                         <rect key="frame" x="0.0" y="0.0" width="20" height="19.5"/>

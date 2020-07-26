@@ -133,6 +133,7 @@ class MainViewController: UIViewController {
         }
         catch {
             // TODO: display error
+            print("Something went wrong")
         }
         
         // update UI
@@ -170,12 +171,14 @@ class MainViewController: UIViewController {
             setupRecordingForAudio()
         }
         else {
+            useAudio = shouldUseAudio
+            
             // create new recorder with new name
             let nameData = PersistentData.shared.getNameData()
             do {
                 var sceneDataRecorder: SceneRecorder
                     = try SceneDataRecorder(nameData: nameData)
-                if shouldUseAudio {
+                if useAudio {
                     sceneDataRecorder = try SceneAudioRecorderDecorator(sceneRecorder: sceneDataRecorder)
                 }
                 sceneRecorder = sceneDataRecorder
@@ -210,6 +213,11 @@ class MainViewController: UIViewController {
     private func updateRecordButtonUI() {
         // hide icon
         recButtonIcon.isHidden = true
+        
+        let micIcon = useAudio ? UIImage(named: "icon_mic") : UIImage(named: "icon_nomic")
+        recButton.setImage(micIcon, for: .normal)
+        recButton.imageView?.contentMode = .scaleAspectFit
+        recButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
         
         // update look of record button based on whether or not we are recording
         let isRecording = sceneRecorder?.isRecording ?? false
