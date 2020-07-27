@@ -15,12 +15,16 @@ enum RecorderError: Error {
     case cannotStartRecording
 }
 
-protocol SceneRecorder {
+protocol SceneRecorderStatus : class {
     var isPrepared: Bool { get }
     var isRecording: Bool { get }
     var name: String { get }
     func getBasePath() -> URL?
     func doesFileExist() -> Bool
+    func willRecordAudio() -> Bool
+}
+
+protocol SceneRecorder : SceneRecorderStatus {
     func prepareRecording() throws
     func startRecording() throws
     func sessionUpdate(_ session: ARSession, didUpdate frame: ARFrame)

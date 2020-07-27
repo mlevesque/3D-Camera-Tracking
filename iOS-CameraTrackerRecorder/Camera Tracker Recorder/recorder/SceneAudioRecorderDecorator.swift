@@ -52,6 +52,12 @@ class SceneAudioRecorderDecorator : SceneRecorder {
         return FileManager.default.fileExists(atPath: audioFile.path)
     }
     
+    /// Will return true because this does record audio.
+    /// - Returns: True
+    func willRecordAudio() -> Bool {
+        return true
+    }
+    
     /// Prepares recording by creating the audio file.
     /// - Throws: RecorderError if file cannot be created
     func prepareRecording() throws {

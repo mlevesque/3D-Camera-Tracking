@@ -58,6 +58,12 @@ final class SceneDataRecorder : SceneRecorder {
         return FileManager.default.fileExists(atPath: txtFile.path)
     }
     
+    /// Returns false as this does not record audio.
+    /// - Returns: False
+    func willRecordAudio() -> Bool {
+        return false
+    }
+    
     /// Prepares for recording by creating the file
     /// - Throws: RecorderError if file location is bad or file could not be created
     func prepareRecording() throws {

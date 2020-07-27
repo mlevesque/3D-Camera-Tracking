@@ -16,8 +16,6 @@ class MainViewController: UIViewController {
     @IBOutlet var sceneView: ARSCNView!
     
     // Buttons
-    @IBOutlet var recButton: UIButton!
-    @IBOutlet var recButtonIcon: UIView!
     @IBOutlet var settingsButton: UIButton!
     @IBOutlet var editNameButton: UIButton!
     @IBOutlet var resetOriginButton: UIButton!
@@ -29,6 +27,7 @@ class MainViewController: UIViewController {
     
     // Child controllers
     private var trackStatusController: TrackStatusViewController?
+    private var recordButtonController: RecordButtonViewController?
     
     private var sceneRecorder: SceneRecorder?
     private var useAudio = false
@@ -95,31 +94,6 @@ class MainViewController: UIViewController {
         sceneView.debugOptions = [.showFeaturePoints, .showWorldOrigin]
     }
     
-    /// Will display a prompt to the user indicating that the current name data will cause a new recording to overwrite
-    /// an existing recording file.
-    func showFileExistsPromptBeforeRecording() {
-        // Initialize Alert Controller
-        let title = ConfigWrapper.getString(withKey: "overwriteAlertTitle")
-        let description = ConfigWrapper.getString(withKey: "overwriteAlertDescription")
-        let alertController = UIAlertController(title: title, message: description, preferredStyle: .alert)
-        
-        // Initialize Actions
-        let yesTitle = ConfigWrapper.getString(withKey: "overwriteAlertActionOverwrite")
-        let yesAction = UIAlertAction(title: yesTitle, style: .destructive) { (action) -> Void in
-            self.startRecording()
-        }
-        let noTitle = ConfigWrapper.getString(withKey: "overwriteAlertActionCancel")
-        let noAction = UIAlertAction(title: noTitle, style: .cancel) { (action) -> Void in
-        }
-         
-        // Add Actions
-        alertController.addAction(yesAction)
-        alertController.addAction(noAction)
-         
-        // Present Alert Controller
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
     /// Starts recording and updates UI
     func startRecording() {
         guard sceneRecorder?.isRecording == false else {
@@ -135,7 +109,7 @@ class MainViewController: UIViewController {
         }
         
         // update UI
-        updateRecordButtonUI()
+        recordButtonController?.update()
         settingsButton.isEnabled = false
         editNameButton.isEnabled = false
         resetOriginButton.isEnabled = false
@@ -182,7 +156,7 @@ class MainViewController: UIViewController {
                 sceneRecorder = sceneDataRecorder
                 
                 // update record button
-                updateRecordButtonUI()
+                recordButtonController?.setRecorder(withSceneRecorderStatus: sceneRecorder)
             }
             catch {
                 // TODO: display error
@@ -204,39 +178,6 @@ class MainViewController: UIViewController {
             }
         } catch {
             prepareRecorder(shouldUseAudio: false)
-        }
-    }
-    
-    /// Updates the look of the record button UI
-    private func updateRecordButtonUI() {
-        // hide icon
-        recButtonIcon.isHidden = true
-        
-        let micIcon = useAudio ? UIImage(named: "icon_mic") : UIImage(named: "icon_nomic")
-        recButton.setImage(micIcon, for: .normal)
-        recButton.imageView?.contentMode = .scaleAspectFit
-        recButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
-        
-        // update look of record button based on whether or not we are recording
-        let isRecording = sceneRecorder?.isRecording ?? false
-        
-        // display button as stop button if currently recording
-        if isRecording {
-            let title = ConfigWrapper.getString(withKey: "recordButtonTitleStop")
-            recButton.backgroundColor = UIColor.gray
-            recButton.setTitle(title, for: UIControl.State.normal)
-        }
-            
-        // display as red record button if not currently recording
-        else {
-            let title = ConfigWrapper.getString(withKey: "recordButtonTitleRecord")
-            recButton.backgroundColor = UIColor.red
-            recButton.setTitle(title, for: UIControl.State.normal)
-            
-            // show caution icon if file exists for current name data
-            if sceneRecorder?.doesFileExist() ?? false {
-                recButtonIcon.isHidden = false
-            }
         }
     }
     
@@ -287,6 +228,24 @@ extension MainViewController : ARSessionDelegate {
     }
 }
 
+// MARK: Methods for Record Button Delegate
+
+extension MainViewController : RecordButtonActionDelegate {
+    /// Triggered when the record button is tapped. Toggle recording.
+    func onRecordPressed() {
+        guard sceneRecorder != nil else {
+            return
+        }
+        
+        if sceneRecorder!.isRecording {
+            stopRecording()
+        }
+        else {
+            startRecording()
+        }
+    }
+}
+
 // MARK: Methods transitioning to and from Main View
 
 extension MainViewController : UIAdaptivePresentationControllerDelegate {
@@ -299,6 +258,9 @@ extension MainViewController : UIAdaptivePresentationControllerDelegate {
         switch segue.identifier {
         case "embedTrackStatus":
             trackStatusController = segue.destination as? TrackStatusViewController
+        case "embedRecord":
+            recordButtonController = segue.destination as? RecordButtonViewController
+            recordButtonController?.delegate = self
         default:
             break
         }
@@ -336,32 +298,9 @@ extension MainViewController : UIAdaptivePresentationControllerDelegate {
 // MARK: UI Actions
 
 extension MainViewController {
-    
     /// Triggered when the Reset Origin button is tapped.
     /// - Parameter sender:
     @IBAction func onResetOriginTouchUp(_ sender: Any) {
         resetOrigin()
-    }
-    
-    /// Triggered when the Record button is tapped.
-    /// - Parameter sender:
-    @IBAction func onRecordTouchUp(_ sender: Any) {
-        guard sceneRecorder != nil else {
-            return
-        }
-        
-        // check if file already exists and if so, prompt user
-        let recorder = sceneRecorder!
-        if (!recorder.isRecording) {
-            if sceneRecorder!.doesFileExist() {
-                showFileExistsPromptBeforeRecording()
-            }
-            else {
-                startRecording()
-            }
-        }
-        else {
-            stopRecording()
-        }
     }
 }
