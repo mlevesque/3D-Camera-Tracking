@@ -31,8 +31,14 @@ class SettingsViewController : UITableViewController {
         return settingsBySection[section].entries.count
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return createSectionUIView(title: settingsBySection[section].title)
+    /// Returns section titles from the settings data for a given section.
+    /// - Parameters:
+    ///   - tableView:
+    ///   - section:
+    /// - Returns: Section title
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection
+                                section: Int) -> String? {
+        return settingsBySection[section].title.uppercased()
     }
 
     /// Returns a table cell for the given index path and based on teh settings data.
@@ -53,18 +59,6 @@ class SettingsViewController : UITableViewController {
         default:
             return UITableViewCell()
         }
-    }
-    
-    /// Builds a view object to use as a section header.
-    /// - Parameter title: Display title for the section
-    /// - Returns: UIView for the section
-    func createSectionUIView(title: String) -> UIView {
-        let view = UITextView()
-        view.text = title.uppercased()
-        view.font = UIFont.systemFont(ofSize: 10)
-        view.textColor = UIColor(named: "settingsSectionLabel")
-        view.textContainerInset = UIEdgeInsets(top: 8, left: 15, bottom: 8, right: 0)
-        return view
     }
 }
 
