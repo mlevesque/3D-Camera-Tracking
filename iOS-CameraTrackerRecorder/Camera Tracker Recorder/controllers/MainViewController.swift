@@ -12,12 +12,10 @@ import ARKit
 import Foundation
 
 class MainViewController: UIViewController {
-    // AR View
     @IBOutlet var sceneView: ARSCNView!
-    
-    // Buttons
     @IBOutlet var settingsButton: UIButton!
     @IBOutlet var resetOriginButton: UIButton!
+    @IBOutlet var timer: TimerButton!
     
     // Child controllers
     private var trackStatusController: TrackStatusViewController?
@@ -42,13 +40,13 @@ class MainViewController: UIViewController {
         useAudio = false
         let shouldUseAudio = PersistentData.shared.getBool(forKey: .useAudio)
         prepareRecorder(shouldUseAudio: shouldUseAudio)
+        
+        // update UI
+        updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // update UI
-        updateUI()
         
         // start AR session
         let configuration = ARWorldTrackingConfiguration()
@@ -76,17 +74,21 @@ class MainViewController: UIViewController {
     
     /// Triggered when any persistent data has changed. This will update the UI and recorder.
     @objc func onPersistDataChanged() {
-        // reinitialize recorder
-        prepareRecorder(shouldUseAudio: PersistentData.shared.getBool(forKey: .useAudio))
-        
         // update UI
         updateUI()
+        
+        // reinitialize recorder
+        prepareRecorder(shouldUseAudio: PersistentData.shared.getBool(forKey: .useAudio))
     }
     
     /// Updates the UI elements with the latest Persistence data.
     func updateUI() {
         trackStatusController?.inMeters = PersistentData.shared.getBool(forKey: .useMetricSystem)
         recordNameController?.update(nameData: PersistentData.shared.getNameData())
+        
+        if sceneRecorder == nil || sceneRecorder!.isRecording == false {
+            timer.setTimer(PersistentData.shared.getDouble(forKey: .previousRecordingTime))
+        }
     }
     
     /// Restarts the AR session to reset the world origin.
@@ -116,6 +118,7 @@ class MainViewController: UIViewController {
         settingsButton.isEnabled = false
         recordNameController?.isEnabled = false
         resetOriginButton.isEnabled = false
+        timer.isEnabled = false
     }
     
     /// Stops recording, increments the take value, and updates UI
@@ -129,6 +132,10 @@ class MainViewController: UIViewController {
         settingsButton.isEnabled = true
         recordNameController?.isEnabled = true
         resetOriginButton.isEnabled = true
+        
+        // save last record time
+        timer.isEnabled = true
+        PersistentData.shared.setValue(recorder.elapsedTime, forKey: .previousRecordingTime)
         
         // increment take - Record button will be updated in the changeNameData call
         let take = PersistentData.shared.getInt(forKey: .take)
@@ -220,6 +227,11 @@ extension MainViewController : ARSessionDelegate {
         
         trackStatusController?.updateTrackingData(position: p, rotation: r, quality: frame.camera.trackingState)
         sceneRecorder?.sessionUpdate(session, didUpdate: frame)
+        
+        // update timer
+        if sceneRecorder?.isRecording ?? false {
+            timer.setTimer(sceneRecorder?.elapsedTime ?? 0.0)
+        }
     }
 }
 
@@ -299,5 +311,13 @@ extension MainViewController {
     /// - Parameter sender:
     @IBAction func onResetOriginTouchUp(_ sender: Any) {
         resetOrigin()
+    }
+    
+    /// Triggered when the timer is tapped. Will reset the timer, but only when there is no recording.
+    /// - Parameter sender: 
+    @IBAction func onTimerTouchUp(_ sender: Any) {
+        if sceneRecorder == nil || sceneRecorder!.isRecording == false {
+            PersistentData.shared.setValue(0.0, forKey: .previousRecordingTime)
+        }
     }
 }

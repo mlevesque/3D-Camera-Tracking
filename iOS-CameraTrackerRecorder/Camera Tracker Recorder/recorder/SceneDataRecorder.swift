@@ -15,12 +15,21 @@ final class SceneDataRecorder : SceneRecorder {
     private var m_prepared: Bool
     private var m_recording: Bool
     private var m_jsonWriter: JsonStreamWriter?
+    private var m_startTimestamp: Double?
     private var m_previousTimestamp: Double?
     private var m_frameCount: Int
     
     var isPrepared: Bool { get { return m_prepared } }
     var isRecording: Bool { get { return m_recording } }
     var name: String { get { return m_name } }
+    var elapsedTime: Double {
+        get {
+            if let start = m_startTimestamp, let current = m_previousTimestamp {
+                return current - start
+            }
+            return 0.0
+        }
+    }
     
     // MARK: Static Methods
     
@@ -163,6 +172,9 @@ final class SceneDataRecorder : SceneRecorder {
         var diff: Double = 0
         if let prev = m_previousTimestamp {
             diff = frame.timestamp - prev
+        }
+        else {
+            m_startTimestamp = frame.timestamp
         }
         m_previousTimestamp = frame.timestamp
         

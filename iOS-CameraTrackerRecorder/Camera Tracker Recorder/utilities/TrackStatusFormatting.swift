@@ -81,6 +81,21 @@ class TrackStatusFormatting {
         }
     }
     
+    /// Returns a string formatted version of the given time.
+    /// - Parameter t: time, in seconds
+    /// - Returns: String formatted as MM:SS.mm
+    static func time(inSeconds t: Double) -> NSAttributedString {
+        // we use 100 instead of 1000 because we only want to show units of 10 milliseconds
+        let wholeT = Int(floor(t))
+        let milliseconds = Int(floor((t - Double(wholeT)) * 100))
+        let minutes = wholeT / 60
+        let seconds = wholeT % 60
+        return NSAttributedString(string: String(format: "%02d:%02d.%02d", minutes, seconds, milliseconds))
+    }
+    
+    /// Returns a string for the abbreviated units to use based on the given units type.
+    /// - Parameter units: the type of units
+    /// - Returns: String of the abbreviated units
     static private func getUnitStr(_ units: Units) -> String {
         switch units {
         case .meters:

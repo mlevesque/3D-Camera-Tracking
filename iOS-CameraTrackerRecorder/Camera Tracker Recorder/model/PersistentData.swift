@@ -13,6 +13,7 @@ enum DefaultsKey : String {
     case projectName
     case scene
     case take
+    case previousRecordingTime
     case useAudio
     case useMetricSystem
 }
@@ -49,6 +50,7 @@ class PersistentData {
         defaults[DefaultsKey.projectName.rawValue] = ConfigWrapper.getString(withKey: "defaultProjectName")
         defaults[DefaultsKey.scene.rawValue] = ConfigWrapper.getString(withKey: "defaultScene")
         defaults[DefaultsKey.take.rawValue] = ConfigWrapper.getInt(withKey: "defaultTake")
+        defaults[DefaultsKey.previousRecordingTime.rawValue] = 0.0
         
         UserDefaults.standard.register(defaults: defaults)
         UserDefaults.standard.synchronize()
@@ -73,6 +75,13 @@ class PersistentData {
     /// - Returns: The value of the given key as an integer
     func getInt(forKey key: DefaultsKey) -> Int {
         return UserDefaults.standard.integer(forKey: key.rawValue)
+    }
+    
+    /// Returns a value as a double from persistence with the given key.
+    /// - Parameter key: Enum of key of the value to return
+    /// - Returns: The value of the given key as a double
+    func getDouble(forKey key: DefaultsKey) -> Double {
+        return UserDefaults.standard.double(forKey: key.rawValue)
     }
     
     /// Returns a value as a boolean from persistence with the given key.
@@ -105,10 +114,5 @@ class PersistentData {
         setValue(data.projectName, forKey: .projectName)
         setValue(data.scene, forKey: .scene)
         setValue(data.take, forKey: .take)
-    }
-    
-    /// Saves the persistence data.
-    func save() {
-        UserDefaults.standard.synchronize()
     }
 }

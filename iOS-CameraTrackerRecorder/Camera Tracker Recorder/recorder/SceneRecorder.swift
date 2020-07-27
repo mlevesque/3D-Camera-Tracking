@@ -19,6 +19,7 @@ protocol SceneRecorderStatus : class {
     var isPrepared: Bool { get }
     var isRecording: Bool { get }
     var name: String { get }
+    var elapsedTime: Double { get }
     func getBasePath() -> URL?
     func doesFileExist() -> Bool
     func willRecordAudio() -> Bool

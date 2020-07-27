@@ -18,6 +18,7 @@ class SceneAudioRecorderDecorator : SceneRecorder {
     var isPrepared: Bool { get {return m_sceneRecorder.isPrepared}}
     var isRecording: Bool { get {return m_sceneRecorder.isRecording}}
     var name: String { get {return m_sceneRecorder.name}}
+    var elapsedTime: Double { get { return m_sceneRecorder.elapsedTime } }
     
     // MARK: Constructor/Destructor
     

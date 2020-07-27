@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3344F28124CACE1800D79B7B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3344F28024CACE1800D79B7B /* Settings.bundle */; };
 		3357AD4F24CEFAF6003B9A05 /* Conversions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3357AD4E24CEFAF6003B9A05 /* Conversions.swift */; };
+		3357AD5124CF627E003B9A05 /* TimerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3357AD5024CF627E003B9A05 /* TimerButton.swift */; };
 		33A83AEB244B69DC007760CD /* TrackStatusFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A83AEA244B69DC007760CD /* TrackStatusFormatting.swift */; };
 		33B4899824CBD72E00821EB1 /* Validations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B4899724CBD72E00821EB1 /* Validations.swift */; };
 		33B4899B24CC10DC00821EB1 /* ValidationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B4899A24CC10DC00821EB1 /* ValidationsTest.swift */; };
@@ -59,6 +60,7 @@
 /* Begin PBXFileReference section */
 		3344F28024CACE1800D79B7B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		3357AD4E24CEFAF6003B9A05 /* Conversions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversions.swift; sourceTree = "<group>"; };
+		3357AD5024CF627E003B9A05 /* TimerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerButton.swift; sourceTree = "<group>"; };
 		33A83AEA244B69DC007760CD /* TrackStatusFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackStatusFormatting.swift; sourceTree = "<group>"; };
 		33B4899724CBD72E00821EB1 /* Validations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validations.swift; sourceTree = "<group>"; };
 		33B4899A24CC10DC00821EB1 /* ValidationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationsTest.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				33B4899724CBD72E00821EB1 /* Validations.swift */,
 				33B489A924CEBB4900821EB1 /* SettingsWrapper.swift */,
 				3357AD4E24CEFAF6003B9A05 /* Conversions.swift */,
+				3357AD5024CF627E003B9A05 /* TimerButton.swift */,
 			);
 			path = utilities;
 			sourceTree = "<group>";
@@ -409,6 +412,7 @@
 				33EA48CF22CB4372001AD43C /* AppDelegate.swift in Sources */,
 				33BA36F522F6D1BB00A44EFF /* SceneAudioRecorderDecorator.swift in Sources */,
 				33E01A8C24BE4701004EB73F /* ConfigWrapper.swift in Sources */,
+				3357AD5124CF627E003B9A05 /* TimerButton.swift in Sources */,
 				33BA36F122F115D000A44EFF /* SceneRecorder.swift in Sources */,
 				33E01A8624BDC1D0004EB73F /* SettingsViewController.swift in Sources */,
 			);
