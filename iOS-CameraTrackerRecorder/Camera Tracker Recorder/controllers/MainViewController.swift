@@ -48,7 +48,7 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         
         // update UI
-        recordNameController?.update(nameData: PersistentData.shared.getNameData())
+        updateUI()
         
         // start AR session
         let configuration = ARWorldTrackingConfiguration()
@@ -80,6 +80,12 @@ class MainViewController: UIViewController {
         prepareRecorder(shouldUseAudio: PersistentData.shared.getBool(forKey: .useAudio))
         
         // update UI
+        updateUI()
+    }
+    
+    /// Updates the UI elements with the latest Persistence data.
+    func updateUI() {
+        trackStatusController?.inMeters = PersistentData.shared.getBool(forKey: .useMetricSystem)
         recordNameController?.update(nameData: PersistentData.shared.getNameData())
     }
     

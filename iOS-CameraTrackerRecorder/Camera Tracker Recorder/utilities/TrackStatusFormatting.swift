@@ -10,6 +10,11 @@ import Foundation
 import UIKit
 import ARKit
 
+enum Units {
+    case meters
+    case feet
+}
+
 class TrackStatusFormatting {
     // prevent this from being instantiated
     private init() {}
@@ -29,10 +34,10 @@ class TrackStatusFormatting {
     /// Returns formatted text for the given position value.
     /// - Parameter value: position value
     /// - Returns: formatted text for the position
-    static func position(_ value: Float) -> NSAttributedString {
+    static func position(_ value: Float, inUnits u: Units = .meters) -> NSAttributedString {
         let result = NSMutableAttributedString()
         result.append(NSAttributedString(string: String(format: "%.2f", value), attributes: posNumAtt))
-        result.append(NSAttributedString(string: "m", attributes: posUnitAtt))
+        result.append(NSAttributedString(string: getUnitStr(u), attributes: posUnitAtt))
         return result
     }
 
@@ -73,6 +78,15 @@ class TrackStatusFormatting {
             case .notAvailable:
                 let text = ConfigWrapper.getString(withKey: "trackStatusNotAvailable")
                 return NSAttributedString(string: text, attributes: qualityBadAtt)
+        }
+    }
+    
+    static private func getUnitStr(_ units: Units) -> String {
+        switch units {
+        case .meters:
+            return "m"
+        case .feet:
+            return "ft"
         }
     }
 }

@@ -20,6 +20,8 @@ class TrackStatusViewController : UIViewController {
     @IBOutlet var rzLabel: UILabel!
     @IBOutlet var qualityLabel: UILabel!
     
+    var inMeters: Bool = true
+    
     /// Upon load, initialize the text fields with a "non value".
     override func viewDidLoad() {
         // initialize labels with non-values
@@ -39,9 +41,13 @@ class TrackStatusViewController : UIViewController {
     ///   - rotation: tracking rotation
     ///   - quality: tracking quality
     func updateTrackingData(position: simd_float3, rotation: simd_float3, quality: ARCamera.TrackingState) {
-        pxLabel.attributedText = TrackStatusFormatting.position(position.x)
-        pyLabel.attributedText = TrackStatusFormatting.position(position.y)
-        pzLabel.attributedText = TrackStatusFormatting.position(position.z)
+        let units: Units = inMeters ? .meters : .feet
+        let px = inMeters ? position.x : convertMetersToFeet(meters: position.x)
+        let py = inMeters ? position.y : convertMetersToFeet(meters: position.y)
+        let pz = inMeters ? position.z : convertMetersToFeet(meters: position.z)
+        pxLabel.attributedText = TrackStatusFormatting.position(px, inUnits: units)
+        pyLabel.attributedText = TrackStatusFormatting.position(py, inUnits: units)
+        pzLabel.attributedText = TrackStatusFormatting.position(pz, inUnits: units)
         
         rxLabel.attributedText = TrackStatusFormatting.rotation(rotation.x)
         ryLabel.attributedText = TrackStatusFormatting.rotation(rotation.y)

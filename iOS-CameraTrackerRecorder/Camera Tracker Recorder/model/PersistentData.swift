@@ -14,6 +14,7 @@ enum DefaultsKey : String {
     case scene
     case take
     case useAudio
+    case useMetricSystem
 }
 
 /// Container for all elements that make up the save name for a recording.
