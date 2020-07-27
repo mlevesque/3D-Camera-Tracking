@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		3344F28124CACE1800D79B7B /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3344F28024CACE1800D79B7B /* Settings.bundle */; };
-		33A83AEB244B69DC007760CD /* StatusFormattingUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A83AEA244B69DC007760CD /* StatusFormattingUtils.swift */; };
+		33A83AEB244B69DC007760CD /* TrackStatusFormatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A83AEA244B69DC007760CD /* TrackStatusFormatting.swift */; };
 		33B4899824CBD72E00821EB1 /* Validations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B4899724CBD72E00821EB1 /* Validations.swift */; };
 		33B4899B24CC10DC00821EB1 /* ValidationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B4899A24CC10DC00821EB1 /* ValidationsTest.swift */; };
+		33B489A424CE56DB00821EB1 /* TrackStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B489A324CE56DB00821EB1 /* TrackStatusViewController.swift */; };
 		33B6E1B122F905B9004ABC73 /* EditTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B6E1B022F905B9004ABC73 /* EditTextViewController.swift */; };
 		33B6E1B522FF3771004ABC73 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B6E1B422FF3771004ABC73 /* UITextFieldExtension.swift */; };
 		33B6E20F2302CB88004ABC73 /* JsonStreamWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33B6E20E2302CB88004ABC73 /* JsonStreamWriter.swift */; };
@@ -52,9 +53,10 @@
 
 /* Begin PBXFileReference section */
 		3344F28024CACE1800D79B7B /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		33A83AEA244B69DC007760CD /* StatusFormattingUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusFormattingUtils.swift; sourceTree = "<group>"; };
+		33A83AEA244B69DC007760CD /* TrackStatusFormatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackStatusFormatting.swift; sourceTree = "<group>"; };
 		33B4899724CBD72E00821EB1 /* Validations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validations.swift; sourceTree = "<group>"; };
 		33B4899A24CC10DC00821EB1 /* ValidationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidationsTest.swift; sourceTree = "<group>"; };
+		33B489A324CE56DB00821EB1 /* TrackStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackStatusViewController.swift; sourceTree = "<group>"; };
 		33B6E1B022F905B9004ABC73 /* EditTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextViewController.swift; sourceTree = "<group>"; };
 		33B6E1B422FF3771004ABC73 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		33B6E20E2302CB88004ABC73 /* JsonStreamWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonStreamWriter.swift; sourceTree = "<group>"; };
@@ -123,7 +125,7 @@
 		330F4E6D2305CCB3009A767E /* utilities */ = {
 			isa = PBXGroup;
 			children = (
-				33A83AEA244B69DC007760CD /* StatusFormattingUtils.swift */,
+				33A83AEA244B69DC007760CD /* TrackStatusFormatting.swift */,
 				33E01A8B24BE4701004EB73F /* ConfigWrapper.swift */,
 				33B4899724CBD72E00821EB1 /* Validations.swift */,
 			);
@@ -156,6 +158,7 @@
 				33EA48D222CB4372001AD43C /* MainViewController.swift */,
 				33B6E1B022F905B9004ABC73 /* EditTextViewController.swift */,
 				33E01A8524BDC1D0004EB73F /* SettingsViewController.swift */,
+				33B489A324CE56DB00821EB1 /* TrackStatusViewController.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -366,11 +369,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				33B6E1B522FF3771004ABC73 /* UITextFieldExtension.swift in Sources */,
-				33A83AEB244B69DC007760CD /* StatusFormattingUtils.swift in Sources */,
+				33A83AEB244B69DC007760CD /* TrackStatusFormatting.swift in Sources */,
 				33BA36F322F6D06900A44EFF /* SceneDataRecorder.swift in Sources */,
 				33B6E1B122F905B9004ABC73 /* EditTextViewController.swift in Sources */,
 				33B6E20F2302CB88004ABC73 /* JsonStreamWriter.swift in Sources */,
 				33EA48D322CB4372001AD43C /* MainViewController.swift in Sources */,
+				33B489A424CE56DB00821EB1 /* TrackStatusViewController.swift in Sources */,
 				33B4899824CBD72E00821EB1 /* Validations.swift in Sources */,
 				33E01A8824BE0510004EB73F /* PersistentData.swift in Sources */,
 				33B6E2122302F23E004ABC73 /* JsonSchemas.swift in Sources */,

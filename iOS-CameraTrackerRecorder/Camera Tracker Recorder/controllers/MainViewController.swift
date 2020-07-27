@@ -12,11 +12,6 @@ import ARKit
 import Foundation
 
 class MainViewController: UIViewController {
-    // positional display UI
-    @IBOutlet var positionDisplays: [UILabel]!
-    @IBOutlet var rotationDisplays: [UILabel]!
-    @IBOutlet var qualityDisplay: UILabel!
-    
     // AR View
     @IBOutlet var sceneView: ARSCNView!
     
@@ -31,6 +26,9 @@ class MainViewController: UIViewController {
     @IBOutlet var projectText: UILabel!
     @IBOutlet var sceneText: UILabel!
     @IBOutlet var takeText: UILabel!
+    
+    // Child controllers
+    private var trackStatusController: TrackStatusViewController?
     
     private var sceneRecorder: SceneRecorder?
     private var useAudio = false
@@ -284,16 +282,7 @@ extension MainViewController : ARSessionDelegate {
         let p = vector3(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
         let r = frame.camera.eulerAngles
         
-        positionDisplays[0].attributedText = formatPosition(p.x)
-        positionDisplays[1].attributedText = formatPosition(p.y)
-        positionDisplays[2].attributedText = formatPosition(p.z)
-        
-        rotationDisplays[0].attributedText = formatRotation(r.x)
-        rotationDisplays[1].attributedText = formatRotation(r.y)
-        rotationDisplays[2].attributedText = formatRotation(r.z)
-        
-        qualityDisplay.attributedText = formatQuality(frame.camera.trackingState)
-        
+        trackStatusController?.updateTrackingData(position: p, rotation: r, quality: frame.camera.trackingState)
         sceneRecorder?.sessionUpdate(session, didUpdate: frame)
     }
 }
@@ -306,6 +295,14 @@ extension MainViewController : UIAdaptivePresentationControllerDelegate {
     ///   - segue:
     ///   - sender:
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // handle embed segue controller referencing
+        switch segue.identifier {
+        case "embedTrackStatus":
+            trackStatusController = segue.destination as? TrackStatusViewController
+        default:
+            break
+        }
+        
         // set the presentation delegate to self
         // this lets us capture the event when the new view controller is dismissed by swiping
         segue.destination.presentationController?.delegate = self
