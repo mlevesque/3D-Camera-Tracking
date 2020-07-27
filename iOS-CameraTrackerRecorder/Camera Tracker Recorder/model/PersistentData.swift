@@ -38,9 +38,9 @@ class PersistentData {
         // register Settings fields to UserDefaults
         let preferences = SettingsWrapper.getSettingsData()
         var defaults = [String : Any]()
-        for (key, data) in preferences {
+        for data in preferences {
             if let val = data.defaultValue {
-                defaults[key] = val
+                defaults[data.key] = val
             }
         }
         
