@@ -11,6 +11,7 @@ import UIKit
 
 class SettingsViewController : UIViewController {
     override func viewDidLoad() {
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

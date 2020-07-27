@@ -35,27 +35,20 @@ class PersistentData {
     
     /// Registers the persistent fields to the UserDefaults.
     func setup() {
-        // get settings fields to persist
-        guard let settingsBundle = Bundle.main.url(forResource: "Settings", withExtension: "bundle") else {
-            return
-        }
-        guard let settings = NSDictionary(contentsOf: settingsBundle.appendingPathComponent("Root.plist")) else {
-            return
-        }
-        guard let preferences = settings.object(forKey: "PreferenceSpecifiers") as? [[String : AnyObject]] else {
-            return
-        }
-        
-        // register fields to UserDefaults
+        // register Settings fields to UserDefaults
+        let preferences = SettingsWrapper.getSettingsData()
         var defaults = [String : Any]()
-        for pref in preferences {
-            if let key = pref["Key"] as? String, let val = pref["DefaultValue"] {
+        for (key, data) in preferences {
+            if let val = data.defaultValue {
                 defaults[key] = val
             }
         }
+        
+        // register record name data
         defaults[DefaultsKey.projectName.rawValue] = ConfigWrapper.getString(withKey: "defaultProjectName")
         defaults[DefaultsKey.scene.rawValue] = ConfigWrapper.getString(withKey: "defaultScene")
         defaults[DefaultsKey.take.rawValue] = ConfigWrapper.getInt(withKey: "defaultTake")
+        
         UserDefaults.standard.register(defaults: defaults)
         UserDefaults.standard.synchronize()
     }
