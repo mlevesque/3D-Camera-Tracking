@@ -17,17 +17,12 @@ class MainViewController: UIViewController {
     
     // Buttons
     @IBOutlet var settingsButton: UIButton!
-    @IBOutlet var editNameButton: UIButton!
     @IBOutlet var resetOriginButton: UIButton!
-    
-    // Text Fields
-    @IBOutlet var projectText: UILabel!
-    @IBOutlet var sceneText: UILabel!
-    @IBOutlet var takeText: UILabel!
     
     // Child controllers
     private var trackStatusController: TrackStatusViewController?
     private var recordButtonController: RecordButtonViewController?
+    private var recordNameController: RecordNameViewController?
     
     private var sceneRecorder: SceneRecorder?
     private var useAudio = false
@@ -52,8 +47,10 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        updateTextUI()
+        // update UI
+        recordNameController?.update(nameData: PersistentData.shared.getNameData())
         
+        // start AR session
         let configuration = ARWorldTrackingConfiguration()
         sceneView.session.run(configuration)
     }
@@ -83,7 +80,7 @@ class MainViewController: UIViewController {
         prepareRecorder(shouldUseAudio: PersistentData.shared.getBool(forKey: .useAudio))
         
         // update UI
-        updateTextUI()
+        recordNameController?.update(nameData: PersistentData.shared.getNameData())
     }
     
     /// Restarts the AR session to reset the world origin.
@@ -111,7 +108,7 @@ class MainViewController: UIViewController {
         // update UI
         recordButtonController?.update()
         settingsButton.isEnabled = false
-        editNameButton.isEnabled = false
+        recordNameController?.isEnabled = false
         resetOriginButton.isEnabled = false
     }
     
@@ -124,7 +121,7 @@ class MainViewController: UIViewController {
         
         // update UI
         settingsButton.isEnabled = true
-        editNameButton.isEnabled = true
+        recordNameController?.isEnabled = true
         resetOriginButton.isEnabled = true
         
         // increment take - Record button will be updated in the changeNameData call
@@ -179,14 +176,6 @@ class MainViewController: UIViewController {
         } catch {
             prepareRecorder(shouldUseAudio: false)
         }
-    }
-    
-    /// Updates the look of the Text UI
-    private func updateTextUI() {
-        let d = PersistentData.shared.getNameData()
-        projectText.text = d.projectName
-        sceneText.text = d.scene
-        takeText.text = "\(d.take)"
     }
 }
 
@@ -261,6 +250,8 @@ extension MainViewController : UIAdaptivePresentationControllerDelegate {
         case "embedRecord":
             recordButtonController = segue.destination as? RecordButtonViewController
             recordButtonController?.delegate = self
+        case "embedRecordName":
+            recordNameController = segue.destination as? RecordNameViewController
         default:
             break
         }

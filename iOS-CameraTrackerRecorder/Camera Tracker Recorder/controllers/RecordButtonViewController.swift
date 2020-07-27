@@ -32,7 +32,7 @@ class RecordButtonViewController : UIViewController {
     }
     
     /// Update UI when loaded.
-    override func viewDidLoad() {
+    override func viewWillAppear(_ animated: Bool) {
         update()
         NotificationCenter.default.addObserver(
             self,
@@ -58,30 +58,30 @@ class RecordButtonViewController : UIViewController {
     func update() {
         // hide icon
         cautionIcon.isHidden = true
-        
+
         // display mic icon based on if if useAudio is set
         let micIcon = m_recorderStatus?.willRecordAudio() ?? false
             ? UIImage(named: "icon_mic") : UIImage(named: "icon_nomic")
         recordButton.setImage(micIcon, for: .normal)
         recordButton.imageView?.contentMode = .scaleAspectFit
         recordButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
-        
+
         // update look of record button based on whether or not we are recording
         let isRecording = m_recorderStatus?.isRecording ?? false
-        
+
         // display button as stop button if currently recording
         if isRecording {
             let title = ConfigWrapper.getString(withKey: "recordButtonTitleStop")
             recordButton.backgroundColor = UIColor.gray
             recordButton.setTitle(title, for: UIControl.State.normal)
         }
-            
+
         // display as red record button if not currently recording
         else {
             let title = ConfigWrapper.getString(withKey: "recordButtonTitleRecord")
             recordButton.backgroundColor = UIColor.red
             recordButton.setTitle(title, for: UIControl.State.normal)
-            
+
             // show caution icon if file exists for current name data
             if m_recorderStatus?.doesFileExist() ?? false {
                 cautionIcon.isHidden = false
