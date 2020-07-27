@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
-    <device id="ipad12_9rounded" orientation="landscape" layout="fullscreen" appearance="light"/>
+    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -14,11 +14,11 @@
             <objects>
                 <viewController id="BV1-FR-VrT" userLabel="Main View Controller" customClass="MainViewController" customModule="Cam_Track_Rec" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U0K-SW-4ec">
-                        <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BrB-h1-WRS" userLabel="AR View">
-                                <rect key="frame" x="0.0" y="0.0" width="1366" height="1024"/>
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                 <gestureRecognizers/>
                             </arscnView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kxb-jG-bjt">
@@ -39,7 +39,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xt-8J-Hja" userLabel="Settings Button">
-                                <rect key="frame" x="1327" y="10" width="29" height="29"/>
+                                <rect key="frame" x="729" y="10" width="29" height="29"/>
                                 <color key="backgroundColor" name="panel_background"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="Qsj-tH-14m"/>
@@ -70,8 +70,8 @@
                                     <segue destination="9aZ-gg-SwZ" kind="embed" identifier="embedTrackStatus" id="7jS-3i-ZdK"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y9E-pB-ESH" userLabel="Record Button">
-                                <rect key="frame" x="595.5" y="313" width="175" height="60"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y9E-pB-ESH" userLabel="Record Button">
+                                <rect key="frame" x="296.5" y="884" width="175" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="175" id="45A-ZT-rUE"/>
                                     <constraint firstAttribute="height" constant="60" id="Qh2-I4-Ksl"/>
@@ -80,8 +80,8 @@
                                     <segue destination="mg0-RX-GZ2" kind="embed" identifier="embedRecord" id="2If-as-EOH"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Po7-Fd-8OI" userLabel="Record Name Panel">
-                                <rect key="frame" x="10" y="283" width="1346" height="100"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Po7-Fd-8OI" userLabel="Record Name Panel">
+                                <rect key="frame" x="10" y="964" width="748" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="225" id="4ww-uD-L3e"/>
                                     <constraint firstAttribute="height" constant="100" id="DGj-D0-PRU"/>
@@ -92,6 +92,11 @@
                                         <exclude reference="4ww-uD-L3e"/>
                                         <exclude reference="DGj-D0-PRU"/>
                                         <exclude reference="hOC-CC-h1T"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=compact-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="hOC-CC-h1T"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact-widthClass=regular">
@@ -105,12 +110,17 @@
                                         <include reference="hOC-CC-h1T"/>
                                     </mask>
                                 </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="hOC-CC-h1T"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <segue destination="5ko-ZI-T2R" kind="embed" identifier="embedRecordName" id="0ro-3c-r82"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uNm-sh-iSJ" userLabel="Timer" customClass="TimerButton" customModule="Cam_Track_Rec" customModuleProvider="target">
-                                <rect key="frame" x="563" y="243" width="240" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uNm-sh-iSJ" userLabel="Timer" customClass="TimerButton" customModule="Cam_Track_Rec" customModuleProvider="target">
+                                <rect key="frame" x="264" y="814" width="240" height="50"/>
                                 <color key="backgroundColor" name="panel_background"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="5Jg-Lf-3vF"/>
