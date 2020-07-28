@@ -137,6 +137,7 @@
 		330F4E6D2305CCB3009A767E /* utilities */ = {
 			isa = PBXGroup;
 			children = (
+				33B6E1B422FF3771004ABC73 /* UITextFieldExtension.swift */,
 				33A83AEA244B69DC007760CD /* TrackStatusFormatting.swift */,
 				33E01A8B24BE4701004EB73F /* ConfigWrapper.swift */,
 				33B4899724CBD72E00821EB1 /* Validations.swift */,
@@ -179,7 +180,6 @@
 			isa = PBXGroup;
 			children = (
 				33B489AB24CEDEAE00821EB1 /* settings */,
-				33B6E1B422FF3771004ABC73 /* UITextFieldExtension.swift */,
 				33EA48D222CB4372001AD43C /* MainViewController.swift */,
 				33B6E1B022F905B9004ABC73 /* EditTextViewController.swift */,
 				33B489A324CE56DB00821EB1 /* TrackStatusViewController.swift */,

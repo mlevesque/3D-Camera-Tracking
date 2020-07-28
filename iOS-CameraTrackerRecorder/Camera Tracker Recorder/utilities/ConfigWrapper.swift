@@ -8,6 +8,46 @@
 
 import Foundation
 
+/// All config keys
+struct ConfigKeys {
+    // default values
+    static let defaultProjectName = "defaultProjectName"
+    static let defaultScene = "defaultScene"
+    static let defaultTake = "defaultTake"
+    
+    // record name validation values
+    static let sizeProjectName = "sizeProjectName"
+    static let sizeScene = "sizeScene"
+    static let minTake = "minTake"
+    static let maxTake = "maxTake"
+    
+    // Record Button Text
+    static let recordButtonTitleStop = "recordButtonTitleStop"
+    static let recordButtonTitleRecord = "recordButtonTitleRecord"
+    
+    // Overwrite Alert Text
+    static let overwriteAlertTitle = "overwriteAlertTitle"
+    static let overwriteAlertDescription = "overwriteAlertDescription"
+    static let overwriteAlertActionOverwrite = "overwriteAlertActionOverwrite"
+    static let overwriteAlertActionCancel = "overwriteAlertActionCancel"
+    
+    // Tracking Quality Text
+    static let trackStatusGood = "trackStatusGood"
+    static let trackStatusExcessiveMotion = "trackStatusExcessiveMotion"
+    static let trackStatusInitializing = "trackStatusInitializing"
+    static let trackStatusNotEnoughFeatures = "trackStatusNotEnoughFeatures"
+    static let trackStatusRelocalizing = "trackStatusRelocalizing"
+    static let trackStatusLimited = "trackStatusLimited"
+    static let trackStatusNotAvailable = "trackStatusNotAvailable"
+    
+    // Formatting
+    static let statusDisplayNumberFormat = "statusDisplayNumberFormat"
+    static let statusDisplayTimerFormat = "statusDisplayTimerFormat"
+    static let statusDisplayUnitDegree = "statusDisplayUnitDegree"
+    static let statusDisplayUnitMeter = "statusDisplayUnitMeter"
+    static let statusDisplayUnitFeet = "statusDisplayUnitFeet"
+}
+
 /// Wrapper class for accessing data from the Config.plist resource file.
 class ConfigWrapper {
     /// Cached config dictionary

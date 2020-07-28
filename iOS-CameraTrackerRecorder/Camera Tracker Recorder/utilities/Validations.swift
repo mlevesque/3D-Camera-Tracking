@@ -15,7 +15,7 @@ class Validations {
     /// - Parameter str: Full string for the project name
     /// - Returns: True if it is valid. False if not.
     static func isProjectNameValid(_ str: String) -> Bool {
-        return str.count <= ConfigWrapper.getInt(withKey: "sizeProjectName") && isValidFilename(str)
+        return str.count <= ConfigWrapper.getInt(withKey: ConfigKeys.sizeProjectName) && isValidFilename(str)
     }
     
     /// Returns true if the given full string for the scene is valid. Validity means that it is within the size limit
@@ -23,7 +23,7 @@ class Validations {
     /// - Parameter str: Full string for the scenee
     /// - Returns: True if it is valid. False if not.
     static func isSceneValid(_ str: String) -> Bool {
-        return str.count <= ConfigWrapper.getInt(withKey: "sizeScene") && isValidFilename(str)
+        return str.count <= ConfigWrapper.getInt(withKey: ConfigKeys.sizeScene) && isValidFilename(str)
     }
     
     /// Returns true if the given full string for the take is valid. Validity means that it is within the size limit
@@ -31,7 +31,11 @@ class Validations {
     /// - Parameter str: Full string for the take
     /// - Returns: True if it is valid. False if not.
     static func isTakeValid(_ str: String) -> Bool {
-        return str.count <= ConfigWrapper.getInt(withKey: "sizeTake") && isNumbersOnly(str)
+        if let num = Int(str), isNumbersOnly(str) {
+            return num >= ConfigWrapper.getInt(withKey: ConfigKeys.minTake)
+                && num <= ConfigWrapper.getInt(withKey: ConfigKeys.maxTake)
+        }
+        return false
     }
     
     /// Returns true if the given string is a valid filename.

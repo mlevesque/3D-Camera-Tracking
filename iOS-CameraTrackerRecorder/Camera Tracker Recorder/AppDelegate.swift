@@ -51,14 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Ensure that current values for name data are all valid. If not, then revert to default value
         let persist = PersistentData.shared
         let nameData = persist.getNameData()
-        if !Validations.isProjectNameValid(nameData.projectName) {
-            persist.setValue(ConfigWrapper.getString(withKey: "defaultProjectName"), forKey: .projectName)
+        if !Validations.isProjectNameValid(nameData.projectName) || nameData.projectName.isEmpty {
+            persist.setValue(ConfigWrapper.getString(withKey: ConfigKeys.defaultProjectName), forKey: .projectName)
         }
-        if !Validations.isSceneValid(nameData.scene) {
-            persist.setValue(ConfigWrapper.getString(withKey: "defaultScene"), forKey: .scene)
+        if !Validations.isSceneValid(nameData.scene) || nameData.scene.isEmpty {
+            persist.setValue(ConfigWrapper.getString(withKey: ConfigKeys.defaultScene), forKey: .scene)
         }
         if !Validations.isTakeValid("\(nameData.take)") {
-            persist.setValue(ConfigWrapper.getInt(withKey: "defaultTake"), forKey: .take)
+            persist.setValue(ConfigWrapper.getInt(withKey: ConfigKeys.defaultTake), forKey: .take)
         }
     }
 

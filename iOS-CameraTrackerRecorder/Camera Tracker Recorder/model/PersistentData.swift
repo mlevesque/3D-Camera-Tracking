@@ -47,9 +47,9 @@ class PersistentData {
         }
         
         // register record name data
-        defaults[DefaultsKey.projectName.rawValue] = ConfigWrapper.getString(withKey: "defaultProjectName")
-        defaults[DefaultsKey.scene.rawValue] = ConfigWrapper.getString(withKey: "defaultScene")
-        defaults[DefaultsKey.take.rawValue] = ConfigWrapper.getInt(withKey: "defaultTake")
+        defaults[DefaultsKey.projectName.rawValue] = ConfigWrapper.getString(withKey: ConfigKeys.defaultProjectName)
+        defaults[DefaultsKey.scene.rawValue] = ConfigWrapper.getString(withKey: ConfigKeys.defaultScene)
+        defaults[DefaultsKey.take.rawValue] = ConfigWrapper.getInt(withKey: ConfigKeys.defaultTake)
         defaults[DefaultsKey.previousRecordingTime.rawValue] = 0.0
         
         UserDefaults.standard.register(defaults: defaults)

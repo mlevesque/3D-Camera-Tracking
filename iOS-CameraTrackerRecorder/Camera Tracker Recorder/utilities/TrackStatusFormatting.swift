@@ -36,7 +36,8 @@ class TrackStatusFormatting {
     /// - Returns: formatted text for the position
     static func position(_ value: Float, inUnits u: Units = .meters) -> NSAttributedString {
         let result = NSMutableAttributedString()
-        result.append(NSAttributedString(string: String(format: "%.2f", value), attributes: posNumAtt))
+        let format = ConfigWrapper.getString(withKey: ConfigKeys.statusDisplayNumberFormat)
+        result.append(NSAttributedString(string: String(format: format, value), attributes: posNumAtt))
         result.append(NSAttributedString(string: getUnitStr(u), attributes: posUnitAtt))
         return result
     }
@@ -48,7 +49,9 @@ class TrackStatusFormatting {
         let val = Int(round((180.0 / .pi) * value))
         let result = NSMutableAttributedString()
         result.append(NSAttributedString(string: "\(val)", attributes: rotNumAtt))
-        result.append(NSAttributedString(string: "°", attributes: rotUnitAtt))
+        result.append(NSAttributedString(
+            string: ConfigWrapper.getString(withKey: ConfigKeys.statusDisplayUnitDegree),
+            attributes: rotUnitAtt))
         return result
     }
 
@@ -58,25 +61,25 @@ class TrackStatusFormatting {
     static func quality(_ trackingState: ARCamera.TrackingState) -> NSAttributedString {
         switch trackingState {
             case .normal:
-                let text = ConfigWrapper.getString(withKey: "trackStatusGood")
+                let text = ConfigWrapper.getString(withKey: ConfigKeys.trackStatusGood)
                 return NSAttributedString(string: text, attributes: qualityGoodAtt)
             case .limited(.excessiveMotion):
-                let text = ConfigWrapper.getString(withKey: "trackStatusExcessiveMotion")
+                let text = ConfigWrapper.getString(withKey: ConfigKeys.trackStatusExcessiveMotion)
                 return NSAttributedString(string: text, attributes: qualityCautionAtt)
             case .limited(.initializing):
-                let text = ConfigWrapper.getString(withKey: "trackStatusInitializing")
+                let text = ConfigWrapper.getString(withKey: ConfigKeys.trackStatusInitializing)
                 return NSAttributedString(string: text, attributes: qualityCautionAtt)
             case .limited(.insufficientFeatures):
-                let text = ConfigWrapper.getString(withKey: "trackStatusNotEnoughFeatures")
+                let text = ConfigWrapper.getString(withKey: ConfigKeys.trackStatusNotEnoughFeatures)
                 return NSAttributedString(string: text, attributes: qualityCautionAtt)
             case .limited(.relocalizing):
-                let text = ConfigWrapper.getString(withKey: "trackStatusRelocalizing")
+                let text = ConfigWrapper.getString(withKey: ConfigKeys.trackStatusRelocalizing)
                 return NSAttributedString(string: text, attributes: qualityCautionAtt)
             case .limited(_):
-                let text = ConfigWrapper.getString(withKey: "trackStatusLimited")
+                let text = ConfigWrapper.getString(withKey: ConfigKeys.trackStatusLimited)
                 return NSAttributedString(string: text, attributes: qualityCautionAtt)
             case .notAvailable:
-                let text = ConfigWrapper.getString(withKey: "trackStatusNotAvailable")
+                let text = ConfigWrapper.getString(withKey: ConfigKeys.trackStatusNotAvailable)
                 return NSAttributedString(string: text, attributes: qualityBadAtt)
         }
     }
@@ -90,7 +93,10 @@ class TrackStatusFormatting {
         let milliseconds = Int(floor((t - Double(wholeT)) * 100))
         let minutes = wholeT / 60
         let seconds = wholeT % 60
-        return NSAttributedString(string: String(format: "%02d:%02d.%02d", minutes, seconds, milliseconds))
+        let format = String(
+            format: ConfigWrapper.getString(withKey: ConfigKeys.statusDisplayTimerFormat),
+            minutes, seconds, milliseconds)
+        return NSAttributedString(string: format)
     }
     
     /// Returns a string for the abbreviated units to use based on the given units type.
@@ -99,9 +105,9 @@ class TrackStatusFormatting {
     static private func getUnitStr(_ units: Units) -> String {
         switch units {
         case .meters:
-            return "m"
+            return ConfigWrapper.getString(withKey: ConfigKeys.statusDisplayUnitMeter)
         case .feet:
-            return "ft"
+            return ConfigWrapper.getString(withKey: ConfigKeys.statusDisplayUnitFeet)
         }
     }
 }

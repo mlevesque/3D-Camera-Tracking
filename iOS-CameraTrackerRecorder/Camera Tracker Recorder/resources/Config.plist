@@ -2,6 +2,20 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>statusDisplayUnitFeet</key>
+	<string>ft</string>
+	<key>statusDisplayUnitMeter</key>
+	<string>m</string>
+	<key>statusDisplayUnitDegree</key>
+	<string>°</string>
+	<key>statusDisplayTimerFormat</key>
+	<string>%02d:%02d.%02d</string>
+	<key>statusDisplayNumberFormat</key>
+	<string>%.2f</string>
+	<key>minTake</key>
+	<integer>1</integer>
+	<key>maxTake</key>
+	<integer>999</integer>
 	<key>sizeTake</key>
 	<integer>3</integer>
 	<key>sizeScene</key>

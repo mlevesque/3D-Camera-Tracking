@@ -182,13 +182,13 @@
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="37J-VB-Ct7"/>
+                                <exclude reference="XCk-CR-7en"/>
+                                <exclude reference="pGM-Re-TB3"/>
                                 <exclude reference="1in-3b-p08"/>
                                 <exclude reference="Hny-bU-D41"/>
                                 <exclude reference="WmM-BJ-yD8"/>
                                 <exclude reference="r7P-1u-913"/>
                                 <exclude reference="rW7-E7-9Gb"/>
-                                <exclude reference="XCk-CR-7en"/>
-                                <exclude reference="pGM-Re-TB3"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular">
@@ -205,9 +205,9 @@
                         <variation key="heightClass=compact-widthClass=regular">
                             <mask key="constraints">
                                 <include reference="37J-VB-Ct7"/>
-                                <exclude reference="rW7-E7-9Gb"/>
                                 <include reference="XCk-CR-7en"/>
                                 <include reference="pGM-Re-TB3"/>
+                                <exclude reference="rW7-E7-9Gb"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -309,14 +309,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="Mc5-cp-e4t" userLabel="TextFields Stack">
-                                <rect key="frame" x="20" y="52" width="748" height="173"/>
+                                <rect key="frame" x="20" y="52" width="748" height="171"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="097-4d-pUP" userLabel="Project Stack">
                                         <rect key="frame" x="0.0" y="0.0" width="748" height="59.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROJECT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZHf-2p-IaK" userLabel="Project Title">
-                                                <rect key="frame" x="0.0" y="0.0" width="70.5" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="74.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Project Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ngF-fk-J8A" userLabel="Project Value">
@@ -324,8 +324,7 @@
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="yes" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                 <connections>
-                                                    <action selector="onEditTextBegin:" destination="cqS-Fw-Bgq" eventType="editingDidBegin" id="BND-DZ-W4n"/>
-                                                    <action selector="onProjectEditEnd:" destination="cqS-Fw-Bgq" eventType="editingDidEnd" id="N3G-1x-fgY"/>
+                                                    <action selector="onTextFieldEditEnd:" destination="cqS-Fw-Bgq" eventType="editingDidEnd" id="kVV-X4-xs2"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
@@ -337,14 +336,14 @@
                                         </constraints>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="n6C-eZ-ybS" userLabel="Scene and Take Stack">
-                                        <rect key="frame" x="0.0" y="78.5" width="748" height="94.5"/>
+                                        <rect key="frame" x="0.0" y="78.5" width="748" height="92.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="MnS-iG-tIp" userLabel="Scene Stack">
                                                 <rect key="frame" x="0.0" y="0.0" width="349" height="59.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCENE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jT6-vo-LEg" userLabel="Scene Title">
-                                                        <rect key="frame" x="0.0" y="0.0" width="51.5" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="54" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Scene" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8Kw-8V-98U" userLabel="Scene Value">
@@ -352,8 +351,7 @@
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad" keyboardAppearance="alert" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                         <connections>
-                                                            <action selector="onEditTextBegin:" destination="cqS-Fw-Bgq" eventType="editingDidBegin" id="hUd-yO-lI5"/>
-                                                            <action selector="onSceneEditEnd:" destination="cqS-Fw-Bgq" eventType="editingDidEnd" id="FRl-rN-pID"/>
+                                                            <action selector="onTextFieldEditEnd:" destination="cqS-Fw-Bgq" eventType="editingDidEnd" id="mBF-9h-CUe"/>
                                                         </connections>
                                                     </textField>
                                                 </subviews>
@@ -363,27 +361,37 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="f6k-5j-6JR" userLabel="Take Stack">
-                                                <rect key="frame" x="399" y="0.0" width="349" height="94.5"/>
+                                                <rect key="frame" x="399" y="0.0" width="349" height="92.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TAKE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9x-On-abF" userLabel="Take Title">
-                                                        <rect key="frame" x="0.0" y="0.0" width="38.5" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="17"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="41" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Take" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jog-p9-1TX" userLabel="Take Value">
-                                                        <rect key="frame" x="0.0" y="25.5" width="349" height="34"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
-                                                        <userDefinedRuntimeAttributes>
-                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
-                                                        </userDefinedRuntimeAttributes>
-                                                        <connections>
-                                                            <action selector="onEditTextBegin:" destination="cqS-Fw-Bgq" eventType="editingDidBegin" id="Gp5-CU-9s0"/>
-                                                            <action selector="onTakeEditEnd:" destination="cqS-Fw-Bgq" eventType="editingDidEnd" id="7qU-70-92P"/>
-                                                        </connections>
-                                                    </textField>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zNx-s7-xcF" userLabel="Take Entry Stack">
+                                                        <rect key="frame" x="0.0" y="25.5" width="349" height="32"/>
+                                                        <subviews>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Take" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jog-p9-1TX" userLabel="Take Value">
+                                                                <rect key="frame" x="0.0" y="0.0" width="245" height="32"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="done" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="doneAccessory" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="onTakeEditEnd:" destination="cqS-Fw-Bgq" eventType="editingDidEnd" id="7qU-70-92P"/>
+                                                                </connections>
+                                                            </textField>
+                                                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="999" translatesAutoresizingMaskIntoConstraints="NO" id="8Y9-d9-VZ0">
+                                                                <rect key="frame" x="255" y="0.0" width="94" height="32"/>
+                                                                <connections>
+                                                                    <action selector="onStepperValueChanged:" destination="cqS-Fw-Bgq" eventType="valueChanged" id="SGW-CC-Ngi"/>
+                                                                </connections>
+                                                            </stepper>
+                                                        </subviews>
+                                                    </stackView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdF-MB-ItL" userLabel="Reset Take Button">
-                                                        <rect key="frame" x="0.0" y="64.5" width="39" height="30"/>
+                                                        <rect key="frame" x="0.0" y="62.5" width="39" height="30"/>
                                                         <state key="normal" title="Reset"/>
                                                         <connections>
                                                             <action selector="onTakeResetTouchUp:" destination="cqS-Fw-Bgq" eventType="touchUpInside" id="Y87-u3-deK"/>
@@ -391,8 +399,8 @@
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="Jog-p9-1TX" secondAttribute="trailing" id="Nd1-ga-xVu"/>
-                                                    <constraint firstItem="Jog-p9-1TX" firstAttribute="leading" secondItem="f6k-5j-6JR" secondAttribute="leading" id="X5V-fe-uDh"/>
+                                                    <constraint firstItem="zNx-s7-xcF" firstAttribute="leading" secondItem="f6k-5j-6JR" secondAttribute="leading" id="MNQ-i0-hAT"/>
+                                                    <constraint firstAttribute="trailing" secondItem="zNx-s7-xcF" secondAttribute="trailing" id="nqK-Oq-AZW"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
@@ -430,6 +438,7 @@
                     <connections>
                         <outlet property="projectText" destination="ngF-fk-J8A" id="3SP-kx-cQu"/>
                         <outlet property="sceneText" destination="8Kw-8V-98U" id="O8s-48-sya"/>
+                        <outlet property="stepperTake" destination="8Y9-d9-VZ0" id="MXz-fd-XEb"/>
                         <outlet property="takeText" destination="Jog-p9-1TX" id="Sih-7F-WMz"/>
                     </connections>
                 </viewController>
@@ -745,17 +754,17 @@
                                 <rect key="frame" x="5" y="5" width="390" height="90"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="HY3-qH-5Ew" userLabel="Project Stack">
-                                        <rect key="frame" x="0.0" y="0.0" width="166.5" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="166.5" height="43"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PROJECT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xlr-gM-2EC" userLabel="Project Title">
-                                                <rect key="frame" x="0.0" y="0.0" width="166.5" height="21"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="166.5" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project Name" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oyE-Gc-pu2" userLabel="Project Value">
-                                                <rect key="frame" x="0.0" y="22" width="166.5" height="28"/>
+                                                <rect key="frame" x="0.0" y="19" width="166.5" height="24"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="28" id="dJt-1b-NBL"/>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="28" id="dJt-1b-NBL"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="highlightedColor"/>
@@ -763,20 +772,20 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="NhG-ZE-fJy" userLabel="Scene and Take Stack">
-                                        <rect key="frame" x="176.5" y="0.0" width="213.5" height="49"/>
+                                        <rect key="frame" x="176.5" y="0.0" width="213.5" height="42"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="emq-8K-x6b" userLabel="Scene Stack">
-                                                <rect key="frame" x="0.0" y="0.0" width="60" height="49"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="42"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SCENE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJd-Q0-mrM" userLabel="Scene Title">
-                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="21"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123A" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="59R-gg-Vkc" userLabel="Scene Value">
-                                                        <rect key="frame" x="0.0" y="21" width="60" height="28"/>
+                                                        <rect key="frame" x="0.0" y="18" width="60" height="24"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="28" id="XAq-Pe-8E4"/>
+                                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="28" id="XAq-Pe-8E4"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <nil key="highlightedColor"/>
@@ -787,17 +796,17 @@
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="1xb-0L-qWO" userLabel="Take Stack">
-                                                <rect key="frame" x="94.5" y="0.0" width="45" height="49"/>
+                                                <rect key="frame" x="94.5" y="0.0" width="45" height="42"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TAKE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nVo-nC-u6L" userLabel="Take Title">
-                                                        <rect key="frame" x="0.0" y="0.0" width="45" height="21"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="45" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbR-nv-qn8" userLabel="Take Value">
-                                                        <rect key="frame" x="0.0" y="21" width="45" height="28"/>
+                                                        <rect key="frame" x="0.0" y="18" width="45" height="24"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="28" id="fvp-gW-rnG"/>
+                                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="28" id="fvp-gW-rnG"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                         <nil key="highlightedColor"/>
@@ -808,7 +817,7 @@
                                                 </constraints>
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pCh-SH-W4F" userLabel="Edit Text Button">
-                                                <rect key="frame" x="173.5" y="10" width="40" height="29"/>
+                                                <rect key="frame" x="173.5" y="6.5" width="40" height="29"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="40" id="Gka-KQ-vfL"/>
                                                     <constraint firstAttribute="width" constant="40" id="tDd-hn-fFe"/>

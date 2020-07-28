@@ -71,14 +71,14 @@ class RecordButtonViewController : UIViewController {
 
         // display button as stop button if currently recording
         if isRecording {
-            let title = ConfigWrapper.getString(withKey: "recordButtonTitleStop")
+            let title = ConfigWrapper.getString(withKey: ConfigKeys.recordButtonTitleStop)
             recordButton.backgroundColor = UIColor.gray
             recordButton.setTitle(title, for: UIControl.State.normal)
         }
 
         // display as red record button if not currently recording
         else {
-            let title = ConfigWrapper.getString(withKey: "recordButtonTitleRecord")
+            let title = ConfigWrapper.getString(withKey: ConfigKeys.recordButtonTitleRecord)
             recordButton.backgroundColor = UIColor.red
             recordButton.setTitle(title, for: UIControl.State.normal)
 
@@ -93,16 +93,16 @@ class RecordButtonViewController : UIViewController {
     /// an existing recording file.
     func showFileExistsPromptBeforeRecording() {
         // Initialize Alert Controller
-        let title = ConfigWrapper.getString(withKey: "overwriteAlertTitle")
-        let description = ConfigWrapper.getString(withKey: "overwriteAlertDescription")
+        let title = ConfigWrapper.getString(withKey: ConfigKeys.overwriteAlertTitle)
+        let description = ConfigWrapper.getString(withKey: ConfigKeys.overwriteAlertDescription)
         let alertController = UIAlertController(title: title, message: description, preferredStyle: .alert)
         
         // Initialize Actions
-        let yesTitle = ConfigWrapper.getString(withKey: "overwriteAlertActionOverwrite")
+        let yesTitle = ConfigWrapper.getString(withKey: ConfigKeys.overwriteAlertActionOverwrite)
         let yesAction = UIAlertAction(title: yesTitle, style: .destructive) { (action) -> Void in
             self.delegate?.onRecordPressed()
         }
-        let noTitle = ConfigWrapper.getString(withKey: "overwriteAlertActionCancel")
+        let noTitle = ConfigWrapper.getString(withKey: ConfigKeys.overwriteAlertActionCancel)
         let noAction = UIAlertAction(title: noTitle, style: .cancel) { (action) -> Void in
         }
          

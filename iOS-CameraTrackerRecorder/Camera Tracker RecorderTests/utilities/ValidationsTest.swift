@@ -58,12 +58,12 @@ class ValidationsTest : XCTestCase {
     
     func testTakeValidations() {
         // Valid strings
-        XCTAssertTrue(Validations.isTakeValid(""))
         XCTAssertTrue(Validations.isTakeValid("1"))
         XCTAssertTrue(Validations.isTakeValid("45"))
         XCTAssertTrue(Validations.isTakeValid("123"))
         
         // Invalid strings
+        XCTAssertFalse(Validations.isTakeValid(""))
         XCTAssertFalse(Validations.isTakeValid(" "))
         XCTAssertFalse(Validations.isTakeValid("a"))
         XCTAssertFalse(Validations.isTakeValid("0.3"))
@@ -72,9 +72,9 @@ class ValidationsTest : XCTestCase {
     }
     
     func testDefaultValueValidations() {
-        let projectName = ConfigWrapper.getString(withKey: "defaultProjectName")
-        let scene = ConfigWrapper.getString(withKey: "defaultScene")
-        let take = ConfigWrapper.getInt(withKey: "defaultTake")
+        let projectName = ConfigWrapper.getString(withKey: ConfigKeys.defaultProjectName)
+        let scene = ConfigWrapper.getString(withKey: ConfigKeys.defaultScene)
+        let take = ConfigWrapper.getInt(withKey: ConfigKeys.defaultTake)
         XCTAssertTrue(Validations.isProjectNameValid(projectName))
         XCTAssertTrue(Validations.isSceneValid(scene))
         XCTAssertTrue(Validations.isTakeValid("\(take)"))

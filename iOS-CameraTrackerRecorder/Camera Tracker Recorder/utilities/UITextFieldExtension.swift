@@ -10,6 +10,7 @@ import UIKit
 
 /// This adds extra functionality to text fields, allowing for a done button to appear on the onscreen keyboard.
 extension UITextField {
+    /// Allows us to add a done button to the keyboard.
     @IBInspectable var doneAccessory: Bool {
         get {
             return self.doneAccessory
@@ -21,6 +22,7 @@ extension UITextField {
         }
     }
     
+    /// Adds Done button to keyboard.
     func addDoneButtonOnKeyboard() {
         let doneToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
         doneToolbar.barStyle = .default
@@ -35,6 +37,7 @@ extension UITextField {
         self.inputAccessoryView = doneToolbar
     }
     
+    /// Triggered when the Done button is tapped. Will end editing on the textfield.
     @objc func doneButtonAction() {
         self.resignFirstResponder()
     }
