@@ -16,6 +16,7 @@ enum DefaultsKey : String {
     case previousRecordingTime
     case useAudio
     case useMetricSystem
+    case showTimer
 }
 
 /// Container for all elements that make up the save name for a recording.

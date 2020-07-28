@@ -22,6 +22,16 @@
 			<key>DefaultValue</key>
 			<true/>
 		</dict>
+        <dict>
+            <key>Type</key>
+            <string>PSToggleSwitchSpecifier</string>
+            <key>Title</key>
+            <string>Show Timer</string>
+            <key>Key</key>
+            <string>showTimer</string>
+            <key>DefaultValue</key>
+            <true/>
+        </dict>
 		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>

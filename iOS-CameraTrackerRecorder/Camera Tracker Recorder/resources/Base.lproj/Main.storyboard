@@ -70,16 +70,6 @@
                                     <segue destination="9aZ-gg-SwZ" kind="embed" identifier="embedTrackStatus" id="7jS-3i-ZdK"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y9E-pB-ESH" userLabel="Record Button">
-                                <rect key="frame" x="162.5" y="95" width="155" height="90"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="155" id="45A-ZT-rUE"/>
-                                    <constraint firstAttribute="height" constant="90" id="Qh2-I4-Ksl"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="mg0-RX-GZ2" kind="embed" identifier="embedRecord" id="2If-as-EOH"/>
-                                </connections>
-                            </containerView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Po7-Fd-8OI" userLabel="Record Name Panel">
                                 <rect key="frame" x="10" y="250" width="460" height="60"/>
                                 <constraints>
@@ -119,35 +109,54 @@
                                     <segue destination="5ko-ZI-T2R" kind="embed" identifier="embedRecordName" id="0ro-3c-r82"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uNm-sh-iSJ" userLabel="Timer" customClass="TimerButton" customModule="Cam_Track_Rec" customModuleProvider="target">
-                                <rect key="frame" x="120" y="190" width="240" height="50"/>
-                                <color key="backgroundColor" name="panel_background"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="q3l-qv-Wwj" userLabel="Record Timer Stack">
+                                <rect key="frame" x="120" y="100" width="240" height="140"/>
+                                <subviews>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y9E-pB-ESH" userLabel="Record Button">
+                                        <rect key="frame" x="45" y="0.0" width="150" height="90"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="90" id="Qh2-I4-Ksl"/>
+                                            <constraint firstAttribute="width" constant="150" id="wDy-Ol-Vcc"/>
+                                        </constraints>
+                                        <connections>
+                                            <segue destination="mg0-RX-GZ2" kind="embed" identifier="embedRecord" id="2If-as-EOH"/>
+                                        </connections>
+                                    </containerView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uNm-sh-iSJ" userLabel="Timer" customClass="TimerButton" customModule="Cam_Track_Rec" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="90" width="240" height="50"/>
+                                        <color key="backgroundColor" name="panel_background"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="5Jg-Lf-3vF"/>
+                                        </constraints>
+                                        <color key="tintColor" name="panel_background"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="##:##.##">
+                                                    <attributes>
+                                                        <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <font key="NSFont" size="30" name="Menlo-Regular"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="15"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onTimerTouchUp:" destination="BV1-FR-VrT" eventType="touchUpInside" id="LXj-j3-24I"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="5Jg-Lf-3vF"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="Sgn-8F-oE8"/>
+                                    <constraint firstAttribute="trailing" secondItem="uNm-sh-iSJ" secondAttribute="trailing" id="8qH-em-o8s"/>
+                                    <constraint firstAttribute="width" constant="240" id="OQE-RS-p35"/>
+                                    <constraint firstItem="uNm-sh-iSJ" firstAttribute="leading" secondItem="q3l-qv-Wwj" secondAttribute="leading" id="aNW-k8-I77"/>
                                 </constraints>
-                                <color key="tintColor" name="panel_background"/>
-                                <inset key="contentEdgeInsets" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="##:##.##">
-                                            <attributes>
-                                                <color key="NSColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <font key="NSFont" size="30" name="Menlo-Regular"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="onTimerTouchUp:" destination="BV1-FR-VrT" eventType="touchUpInside" id="LXj-j3-24I"/>
-                                </connections>
-                            </button>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -156,14 +165,13 @@
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="5xt-8J-Hja" secondAttribute="trailing" constant="10" id="8l4-tx-m1H"/>
                             <constraint firstItem="kxb-jG-bjt" firstAttribute="top" secondItem="ynA-vj-I7u" secondAttribute="bottom" constant="5" id="9jn-vp-IJg"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="leading" secondItem="U0K-SW-4ec" secondAttribute="leading" id="A8O-6l-XoT"/>
-                            <constraint firstItem="Y9E-pB-ESH" firstAttribute="centerX" secondItem="fQZ-KI-GVf" secondAttribute="centerX" id="GHP-84-z7V"/>
-                            <constraint firstItem="Po7-Fd-8OI" firstAttribute="top" secondItem="uNm-sh-iSJ" secondAttribute="bottom" constant="10" id="Hny-bU-D41"/>
+                            <constraint firstItem="q3l-qv-Wwj" firstAttribute="centerX" secondItem="fQZ-KI-GVf" secondAttribute="centerX" id="GHP-84-z7V"/>
+                            <constraint firstItem="Po7-Fd-8OI" firstAttribute="top" secondItem="q3l-qv-Wwj" secondAttribute="bottom" constant="10" id="Hny-bU-D41"/>
                             <constraint firstItem="ynA-vj-I7u" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" constant="10" id="Q7P-V6-cQi"/>
-                            <constraint firstItem="Y9E-pB-ESH" firstAttribute="centerX" secondItem="uNm-sh-iSJ" secondAttribute="centerX" id="TmO-W2-88S"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="Ucx-I2-olx"/>
                             <constraint firstItem="BrB-h1-WRS" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kxb-jG-bjt" secondAttribute="trailing" constant="1" id="Vkg-Gl-wWr"/>
                             <constraint firstItem="Po7-Fd-8OI" firstAttribute="centerX" secondItem="fQZ-KI-GVf" secondAttribute="centerX" id="WmM-BJ-yD8"/>
-                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="uNm-sh-iSJ" secondAttribute="bottom" constant="10" id="XCk-CR-7en">
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="q3l-qv-Wwj" secondAttribute="bottom" constant="10" id="XCk-CR-7en">
                                 <variation key="heightClass=compact-widthClass=regular" constant="10"/>
                             </constraint>
                             <constraint firstItem="5xt-8J-Hja" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" constant="10" id="bhj-i6-yoP"/>
@@ -171,11 +179,9 @@
                             <constraint firstAttribute="bottom" secondItem="BrB-h1-WRS" secondAttribute="bottom" id="iJB-uZ-U7P"/>
                             <constraint firstItem="kxb-jG-bjt" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" constant="10" id="kxo-fz-gEq"/>
                             <constraint firstAttribute="trailing" secondItem="BrB-h1-WRS" secondAttribute="trailing" id="lpc-gL-2Nk"/>
-                            <constraint firstItem="uNm-sh-iSJ" firstAttribute="top" secondItem="Y9E-pB-ESH" secondAttribute="bottom" constant="5" id="pGM-Re-TB3"/>
                             <constraint firstItem="Po7-Fd-8OI" firstAttribute="centerX" secondItem="fQZ-KI-GVf" secondAttribute="centerX" id="r7P-1u-913"/>
                             <constraint firstItem="Po7-Fd-8OI" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" constant="758" id="rW7-E7-9Gb"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="Po7-Fd-8OI" secondAttribute="bottom" constant="10" id="uDd-2O-PcZ"/>
-                            <constraint firstItem="uNm-sh-iSJ" firstAttribute="top" secondItem="Y9E-pB-ESH" secondAttribute="bottom" constant="5" id="ukH-xF-aip"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="trailing" secondItem="Po7-Fd-8OI" secondAttribute="trailing" constant="10" id="xir-gN-2o8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
@@ -183,7 +189,6 @@
                             <mask key="constraints">
                                 <exclude reference="37J-VB-Ct7"/>
                                 <exclude reference="XCk-CR-7en"/>
-                                <exclude reference="pGM-Re-TB3"/>
                                 <exclude reference="1in-3b-p08"/>
                                 <exclude reference="Hny-bU-D41"/>
                                 <exclude reference="WmM-BJ-yD8"/>
@@ -206,7 +211,6 @@
                             <mask key="constraints">
                                 <include reference="37J-VB-Ct7"/>
                                 <include reference="XCk-CR-7en"/>
-                                <include reference="pGM-Re-TB3"/>
                                 <exclude reference="rW7-E7-9Gb"/>
                             </mask>
                         </variation>

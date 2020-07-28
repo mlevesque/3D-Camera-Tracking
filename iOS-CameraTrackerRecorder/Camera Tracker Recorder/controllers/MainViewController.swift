@@ -89,6 +89,7 @@ class MainViewController: UIViewController {
         if sceneRecorder == nil || sceneRecorder!.isRecording == false {
             timer.setTimer(PersistentData.shared.getDouble(forKey: .previousRecordingTime))
         }
+        timer.isHidden = !PersistentData.shared.getBool(forKey: .showTimer)
     }
     
     /// Restarts the AR session to reset the world origin.
